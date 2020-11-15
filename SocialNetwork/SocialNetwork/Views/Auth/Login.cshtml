@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Auth/login.css">
+    <title>Project Management</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="formContent">
+            <h2 class="active"> Login </h2>
+
+            <div>
+                <img src="~/images/auth/user.svg" id="icon" alt="User Icon" />
+            </div>
+
+            <form>
+                <input class="textInput" type="text" id="login" name="login" placeholder="email">
+                <input class="textInput" type="text" id="password" name="login" placeholder="password">
+                <input class="submitButton" type="submit" value="Log In">
+            </form>
+
+            <div id="formFooter">
+                Don't have an account? Register <a asp-controller="Auth" asp-action="Register">here</a> !
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+
+
+

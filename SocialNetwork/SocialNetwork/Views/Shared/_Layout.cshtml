@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Social Network</title>
+    <script src="https://kit.fontawesome.com/ca80789860.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/Shared/navbar.css" />
+    @RenderSection("Styles", required: true)
+</head>
+<body>
+    <div class="body-container">
+        <div class="navbar">
+            <div class="logo-container">
+                <img src="~/images/logo/889114.svg" class="logo" alt="logo">
+            </div>
+            <div class="search-bar">
+                <form class="example">
+                    <input type="text" class="input" placeholder="Search people.." name="search">
+                    <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <div class="navigation">
+                <div class="home">
+                    <i class="fas fa-home fa-lg"></i>
+                </div>
+                <div class="network">
+                    <i class="fas fa-users fa-lg"></i>
+                </div>
+                <div class="messages">
+                    <i class="fas fa-comments fa-lg"></i>
+                </div>
+            </div>
+            <div class="profile-wrapper">
+                <div class="profile-image-container">
+                    <img class="profile-image"
+                         src="https://gaimer.net/wp-content/uploads/2020/05/valkyrae-alone-pose-e1590397862777.jpg" alt="">
+                </div>
+                <div class="profile-name">
+                    <a class="links">
+                        Kristina Bojchevska
+                    </a>
+                </div>
+
+                <div class="notifications">
+                    <i class="fas fa-bell fa-lg"></i>
+                </div>
+                <div class="settings">
+                    <i class="fas fa-cog fa-lg"></i>
+                </div>
+            </div>
+        </div>
+        <div class="content-container">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

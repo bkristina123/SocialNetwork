@@ -1,0 +1,55 @@
+﻿@model SocialNetwork.ModelDTOs.RegisterDTO
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Auth/register.css">
+    <title>Project Management</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="formContent">
+            <h2 class="active"> Register </h2>
+
+            <div>
+                <img src="~/images/auth/user.svg" id="icon" alt="User Icon" />
+            </div>
+
+            <form asp-controller="Auth" asp-action="Register" method="post">
+                <input asp-for="FirstName" class="textInput" type="text" placeholder="First Name">
+                <span class="validation-span" asp-validation-for="FirstName"></span>
+
+                <input asp-for="LastName" class="textInput" type="text" placeholder="Last Name">
+                <span class="validation-span" asp-validation-for="LastName"></span>
+
+                <input asp-for="Email" class="textInput" placeholder="Email">
+                <span class="validation-span" asp-validation-for="Email"></span>
+
+
+                <input asp-for="Password" class="textInput" type="password" id="passpord" name="login" placeholder="Password">
+                <span class="validation-span" asp-validation-for="Password"></span>
+
+                <input asp-for="ConfirmPassword" class="textInput" type="password" id="repeatPassword" name="login" placeholder="Repeat Password">
+                <span class="validation-span" asp-validation-for="ConfirmPassword"></span>
+
+
+
+                <input class="submitButton" type="submit" value="Register">
+            </form>
+
+            <div id="formFooter">
+                Already have an account? Login <a asp-controller="Auth" asp-action="Login">here</a> !
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+
