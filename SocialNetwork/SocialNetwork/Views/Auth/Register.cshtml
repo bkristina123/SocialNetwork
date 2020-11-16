@@ -23,6 +23,9 @@
             </div>
 
             <form asp-controller="Auth" asp-action="Register" method="post">
+
+                <input type="hidden" asp-for="Id" />
+
                 <input asp-for="FirstName" class="textInput" type="text" placeholder="First Name">
                 <span class="validation-span" asp-validation-for="FirstName"></span>
 
@@ -33,12 +36,13 @@
                 <span class="validation-span" asp-validation-for="Email"></span>
 
 
-                <input asp-for="Password" class="textInput" type="password" id="passpord" name="login" placeholder="Password">
+                <input asp-for="Password" class="textInput" type="password" placeholder="Password">
                 <span class="validation-span" asp-validation-for="Password"></span>
 
-                <input asp-for="ConfirmPassword" class="textInput" type="password" id="repeatPassword" name="login" placeholder="Repeat Password">
+                <input asp-for="ConfirmPassword" class="textInput" type="password" placeholder="Repeat Password">
                 <span class="validation-span" asp-validation-for="ConfirmPassword"></span>
 
+                <div class="validation-span" asp-validation-summary="ModelOnly"></div>
 
 
                 <input class="submitButton" type="submit" value="Register">

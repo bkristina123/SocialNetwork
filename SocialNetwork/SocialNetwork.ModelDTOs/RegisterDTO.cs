@@ -4,6 +4,9 @@ namespace SocialNetwork.ModelDTOs
 {
     public class RegisterDTO
     {
+
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Please enter your First Name")]
         public string FirstName { get; set; }
 
