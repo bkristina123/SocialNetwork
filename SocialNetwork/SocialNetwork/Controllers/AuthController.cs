@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.ModelDTOs;
+using SocialNetwork.ModelDTOs.ActionResponse;
 using SocialNetwork.Services.Interfaces;
 using System.Threading.Tasks;
 
@@ -16,6 +18,7 @@ namespace SocialNetwork.Controllers
 
         [Route("/login")]
         public IActionResult Login()
+        
         {
             var loginDTO = new LoginDTO();
             return View(loginDTO);
@@ -23,12 +26,22 @@ namespace SocialNetwork.Controllers
 
         [HttpPost]
         [Route("/login")]
-        public IActionResult Login(LoginDTO loginDTO)
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
-            //login logic
-            return View();
-        }
+            if(ModelState.IsValid)
+            {
+                SignInResponse response = await _authService.LoginUserAsync(loginDTO);
 
+                if(response.IsSuccesful)
+                {
+                    return RedirectToAction("HomePage", "Home");
+                }
+
+                ModelState.AddModelError(string.Empty, response.ErrorMessage);
+            }
+
+            return View(loginDTO);
+        }
 
         [Route("/register")]
         public IActionResult Register()
@@ -61,7 +74,7 @@ namespace SocialNetwork.Controllers
             }
 
 
-            return RedirectToAction("Login");
+            return RedirectToAction(nameof(Login));
 
         }
     }

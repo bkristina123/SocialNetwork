@@ -1,4 +1,6 @@
-﻿
+﻿@model SocialNetwork.ModelDTOs.LoginDTO
+
+
 @{
     ViewData["Title"] = "Login";
     Layout = null;
@@ -22,9 +24,16 @@
                 <img src="~/images/auth/user.svg" id="icon" alt="User Icon" />
             </div>
 
-            <form>
-                <input class="textInput" type="text" id="login" name="login" placeholder="email">
-                <input class="textInput" type="text" id="password" name="login" placeholder="password">
+            <form asp-controller="Auth" asp-action="Login" method="post">
+
+                <input asp-for="Email" class="textInput" placeholder="Email">
+                <span class="validation-span" asp-validation-for="Email"></span>
+
+                <input asp-for="Password" class="textInput" placeholder="Password">
+                <span class="validation-span" asp-validation-for="Password"></span>
+
+                <div class="validation-span" asp-validation-summary="ModelOnly"></div>
+
                 <input class="submitButton" type="submit" value="Log In">
             </form>
 

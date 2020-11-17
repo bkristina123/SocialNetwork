@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SocialNetwork.Common\SocialNetwork.Common.csproj" />
     <ProjectReference Include="..\SocialNetwork.ModelDTOs\SocialNetwork.ModelDTOs.csproj" />
     <ProjectReference Include="..\SocialNetwork.Repositories\SocialNetwork.Repositories.csproj" />

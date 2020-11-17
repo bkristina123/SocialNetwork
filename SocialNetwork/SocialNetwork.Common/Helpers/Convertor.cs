@@ -16,5 +16,6 @@ namespace SocialNetwork.Common.Helpers
                 UserName = registerDTO.Email
             };
         }
+
     }
 }

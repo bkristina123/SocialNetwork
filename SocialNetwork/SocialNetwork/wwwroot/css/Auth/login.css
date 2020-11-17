@@ -110,3 +110,9 @@ h2.active {
 
 }
 
+.validation-span {
+    width: 50%;
+    color: red;
+    display: block;
+    margin: auto;
+}
