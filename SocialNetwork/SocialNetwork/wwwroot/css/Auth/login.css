@@ -101,7 +101,6 @@ h2.active {
   border-radius: 5px 5px 5px 5px;
 }
 
-
 #icon {
   width:45%;
   margin-bottom: 20px;
@@ -110,9 +109,3 @@ h2.active {
 
 }
 
-.validation-span {
-    width: 50%;
-    color: red;
-    display: block;
-    margin: auto;
-}

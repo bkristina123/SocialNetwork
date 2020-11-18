@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.Controllers
 {
+    [AllowAnonymous]
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
