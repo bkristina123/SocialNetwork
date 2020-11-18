@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
-namespace SocialNetwork.ModelDTOs
+namespace SocialNetwork.UserDTOs
 {
     public class RegisterDTO
     {
@@ -27,5 +28,7 @@ namespace SocialNetwork.ModelDTOs
         [Required(ErrorMessage = "Please confirm your password")]
         [Compare("Password", ErrorMessage = "Passwords don't match.")]
         public string ConfirmPassword { get; set; }
+
+        public IFormFile ProfilePicture { get; set; }
     }
 }

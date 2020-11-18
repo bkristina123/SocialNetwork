@@ -1,11 +1,12 @@
 ﻿using SocialNetwork.Data.Models;
-using SocialNetwork.ModelDTOs;
+using SocialNetwork.UserDTOs;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Common.Helpers
 {
-    public static class Convertor
+    public static class ModelConvertor
     {
-        public static User ConvertToUserEntity(this RegisterDTO registerDTO)
+        public static async Task<User> ConvertToUserEntity(this RegisterDTO registerDTO)
         {
             return new User()
             {
@@ -13,7 +14,8 @@ namespace SocialNetwork.Common.Helpers
                 FirstName = registerDTO.FirstName,
                 LastName = registerDTO.LastName,
                 Email = registerDTO.Email,
-                UserName = registerDTO.Email
+                UserName = registerDTO.Email,
+                ProfilePicture = await registerDTO.ProfilePicture.ConvertImageToByte(),
             };
         }
 

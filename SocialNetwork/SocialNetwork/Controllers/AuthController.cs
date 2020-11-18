@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SocialNetwork.ModelDTOs;
 using SocialNetwork.ModelDTOs.ActionResponse;
 using SocialNetwork.Services.Interfaces;
+using SocialNetwork.UserDTOs;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Controllers
@@ -27,7 +27,7 @@ namespace SocialNetwork.Controllers
 
         [HttpPost]
         [Route("/login")]
-        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        public async Task<IActionResult> Login(LoginDTO loginDTO, string returnUrl)
         {
             if(ModelState.IsValid)
             {
@@ -73,6 +73,7 @@ namespace SocialNetwork.Controllers
 
                 return View(registerDTO);
             }
+
 
 
             return RedirectToAction(nameof(Login));

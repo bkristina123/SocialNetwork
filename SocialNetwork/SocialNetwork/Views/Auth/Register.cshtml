@@ -1,4 +1,4 @@
-﻿@model SocialNetwork.ModelDTOs.RegisterDTO
+﻿@model SocialNetwork.UserDTOs.RegisterDTO
 
 @{
     ViewData["Title"] = "Register";
@@ -22,7 +22,7 @@
                 <img src="~/images/auth/user.svg" id="icon" alt="User Icon" />
             </div>
 
-            <form asp-controller="Auth" asp-action="Register" method="post">
+            <form asp-controller="Auth" asp-action="Register" method="post" enctype="multipart/form-data">
 
                 <input type="hidden" asp-for="Id" />
 
@@ -41,6 +41,12 @@
 
                 <input asp-for="ConfirmPassword" class="textInput" type="password" placeholder="Repeat Password">
                 <span class="validation-span" asp-validation-for="ConfirmPassword"></span>
+
+                <div class="textInput">
+                    <label asp-for="ProfilePicture"> Choose Profile Photo</label>
+                    <input class="textInput"  asp-for="ProfilePicture" type="file" accept="image/*">
+                </div>
+
 
                 <div class="validation-span" asp-validation-summary="ModelOnly"></div>
 

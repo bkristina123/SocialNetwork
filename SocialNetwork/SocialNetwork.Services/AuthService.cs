@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SocialNetwork.Common.Helpers;
 using SocialNetwork.Data.Models;
-using SocialNetwork.ModelDTOs;
 using SocialNetwork.ModelDTOs.ActionResponse;
 using SocialNetwork.Services.Interfaces;
+using SocialNetwork.UserDTOs;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Services
@@ -23,7 +23,7 @@ namespace SocialNetwork.Services
         public async Task<IdentityResult> CreateUserAsync(RegisterDTO registerDTO)
         {
 
-            var user = registerDTO.ConvertToUserEntity();
+            var user = await registerDTO.ConvertToUserEntity();
 
             return await _userManager.CreateAsync(user, registerDTO.Password);
         }
@@ -46,7 +46,7 @@ namespace SocialNetwork.Services
             {
                 response.ErrorMessage = "Invalid password";
                 return response;
-            } 
+            }
 
             var signInResult = await _signInManager.PasswordSignInAsync(user.Email, loginDTO.Password, false, false);
 

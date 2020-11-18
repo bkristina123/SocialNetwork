@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SocialNetwork.ModelDTOs;
 using SocialNetwork.ModelDTOs.ActionResponse;
+using SocialNetwork.UserDTOs;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Interfaces

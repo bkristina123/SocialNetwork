@@ -1,4 +1,7 @@
-﻿@{
+﻿@model SocialNetwork.UserDTOs.HomepageUserDTO
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -76,12 +79,12 @@
             <div class="post-username-image">
                 <div class="profile-image-container post-class">
                     <img class="profile-image"
-                         src="https://gaimer.net/wp-content/uploads/2020/05/valkyrae-alone-pose-e1590397862777.jpg" alt="">
+                         src="data:image/*; base64, @Model.ProfilePhoto" alt="">
                 </div>
             </div>
             <div class="post-something-container">
                 <form class="post-something-box">
-                    <input type="text" class="post-input" placeholder="What's on your mind, Kristina?">
+                    <input type="text" class="post-input" placeholder="What's on your mind, @Model.FirstName?">
                 </form>
             </div>
         </div>

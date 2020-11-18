@@ -1,20 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using SocialNetwork.Common.Helpers;
+using SocialNetwork.Services.Interfaces;
+using System.Security.Claims;
 
 namespace SocialNetwork.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IUserService _userService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IUserService userService)
         {
-            _logger = logger;
+            _userService = userService;
         }
 
         public IActionResult HomePage()
         {
-            return View();
+            var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var currentUser = _userService.GetUserById(int.Parse(currentUserId))
+                .ConvertToHomepageUserDTO();
+
+            return View(currentUser);
         }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SocialNetwork.Data;
 using SocialNetwork.Data.Models;
+using SocialNetwork.Repositories;
 using SocialNetwork.Services;
 using SocialNetwork.Services.Interfaces;
 
@@ -38,6 +39,9 @@ namespace SocialNetwork
             });
 
             services.AddScoped<IAuthService, AuthService>();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
 
             services.AddControllersWithViews();

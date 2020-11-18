@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SocialNetwork.ModelDTOs
+namespace SocialNetwork.UserDTOs
 {
     public class LoginDTO
     {

@@ -11,5 +11,8 @@ namespace SocialNetwork.Data.Models
         [Required]
         [MaxLength(30)]
         public string LastName { get; set; }
+
+        public byte[] ProfilePicture { get; set; }
+
     }
 }

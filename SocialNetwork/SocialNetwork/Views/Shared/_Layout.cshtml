@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@model SocialNetwork.UserDTOs.HomepageUserDTO
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -34,11 +37,11 @@
             <div class="profile-wrapper">
                 <div class="profile-image-container">
                     <img class="profile-image"
-                         src="https://gaimer.net/wp-content/uploads/2020/05/valkyrae-alone-pose-e1590397862777.jpg" alt="">
+                         src="data:image/*; base64, @Model.ProfilePhoto" alt="">
                 </div>
                 <div class="profile-name">
                     <a class="links">
-                        Kristina Bojchevska
+                        @Model.FirstName @Model.LastName
                     </a>
                 </div>
 
