@@ -74,10 +74,15 @@ namespace SocialNetwork.Controllers
                 return View(registerDTO);
             }
 
-
-
             return RedirectToAction(nameof(Login));
 
+        }
+
+
+        public async Task<IActionResult> Logout()
+        {
+            await _authService.LogoutAsync();
+            return RedirectToAction(nameof(Login));
         }
     }
 }

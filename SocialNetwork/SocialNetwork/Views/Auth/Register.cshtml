@@ -46,6 +46,7 @@
                     <label asp-for="ProfilePicture"> Choose Profile Photo</label>
                     <input class="textInput"  asp-for="ProfilePicture" type="file" accept="image/*">
                 </div>
+                <span class="validation-span" asp-validation-for="ProfilePicture"></span>
 
 
                 <div class="validation-span" asp-validation-summary="ModelOnly"></div>

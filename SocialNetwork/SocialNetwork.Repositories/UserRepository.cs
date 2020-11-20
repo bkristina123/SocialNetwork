@@ -16,7 +16,9 @@ namespace SocialNetwork.Repositories
 
         public User GetUserById(int id)
         {
-            return _context.Users.FirstOrDefault( x => x.Id.Equals(id));
+            var user = _context.Users.FirstOrDefault( x => x.Id.Equals(id));
+
+            return user;
         }
     }
 }

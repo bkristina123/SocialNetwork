@@ -29,6 +29,7 @@ namespace SocialNetwork.UserDTOs
         [Compare("Password", ErrorMessage = "Passwords don't match.")]
         public string ConfirmPassword { get; set; }
 
+        [Required(ErrorMessage = "Please submit a photo")]
         public IFormFile ProfilePicture { get; set; }
     }
 }

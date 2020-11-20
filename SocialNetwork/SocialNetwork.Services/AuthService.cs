@@ -59,5 +59,10 @@ namespace SocialNetwork.Services
             response.IsSuccesful = true;
             return response;
         }
+
+        public async Task LogoutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
     }
 }

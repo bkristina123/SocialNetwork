@@ -1,4 +1,4 @@
-﻿@model SocialNetwork.UserDTOs.HomepageUserDTO
+﻿@*@model SocialNetwork.UserDTOs.HomepageUserDTO*@
 
 
 <!DOCTYPE html>
@@ -48,7 +48,7 @@
                 <div class="notifications">
                     <i class="fas fa-bell fa-lg"></i>
                 </div>
-                <div class="settings">
+                <div class="settings" id="settings-button">
                     <i class="fas fa-cog fa-lg"></i>
                 </div>
             </div>
@@ -57,5 +57,7 @@
             @RenderBody()
         </div>
     </div>
+
+    @RenderSection("Scripts", required:false)
 </body>
 </html>

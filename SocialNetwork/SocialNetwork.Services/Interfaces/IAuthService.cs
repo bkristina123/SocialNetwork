@@ -9,5 +9,6 @@ namespace SocialNetwork.Services.Interfaces
     {
         Task<IdentityResult> CreateUserAsync(RegisterDTO registerDTO);
         Task<SignInResponse> LoginUserAsync(LoginDTO loginDTO);
+        Task LogoutAsync();
     }
 }

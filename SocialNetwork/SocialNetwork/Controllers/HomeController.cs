@@ -16,12 +16,18 @@ namespace SocialNetwork.Controllers
 
         public IActionResult HomePage()
         {
-            var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var currentUser = _userService.GetUserById(int.Parse(currentUserId))
-                .ConvertToHomepageUserDTO();
+         var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            return View(currentUser);
+         var currentUser = _userService.GetUserById(int.Parse(currentUserId));
+
+                if(currentUser is null)
+                {
+                    return RedirectToAction("Register", "Auth");
+                }
+
+            return View(currentUser.ConvertToHomepageUserDTO());
+
         }
     }
 }
