@@ -35,6 +35,10 @@ namespace SocialNetwork.Controllers
 
                 if(response.IsSuccesful)
                 {
+                    if(!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
                     return RedirectToAction("HomePage", "Home");
                 }
 

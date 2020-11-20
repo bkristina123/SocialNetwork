@@ -25,7 +25,7 @@
                 <img src="~/images/auth/user.svg" id="icon" alt="User Icon" />
             </div>
 
-            <form asp-controller="Auth" asp-action="Login" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]" method="post">
+            <form method="post">
 
                 <input asp-for="Email" class="textInput" placeholder="Email">
                 <span class="validation-span" asp-validation-for="Email"></span>
