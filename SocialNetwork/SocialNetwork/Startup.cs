@@ -11,6 +11,7 @@ using SocialNetwork.Common.Helpers;
 using SocialNetwork.Data;
 using SocialNetwork.Data.Models;
 using SocialNetwork.Repositories;
+using SocialNetwork.Repositories.Interfaces;
 using SocialNetwork.Services;
 using SocialNetwork.Services.Interfaces;
 
@@ -44,6 +45,9 @@ namespace SocialNetwork
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IPostRepository, PostRepository>();
 
             services.AddScoped<IUserClaimsPrincipalFactory<User>, AppUserClaimsPrincipalFactory>();
 

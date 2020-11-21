@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SocialNetwork.Data.Models
@@ -13,6 +14,8 @@ namespace SocialNetwork.Data.Models
         public string LastName { get; set; }
 
         public byte[] ProfilePicture { get; set; }
+
+        public List<TextPost> TextPosts { get; set; }
 
     }
 }

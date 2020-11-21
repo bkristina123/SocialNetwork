@@ -7,6 +7,7 @@ namespace SocialNetwork.Controllers
         public IActionResult CreatePost()
         {
             return RedirectToAction("HomePage", "Home");
+
         }
     }
 }

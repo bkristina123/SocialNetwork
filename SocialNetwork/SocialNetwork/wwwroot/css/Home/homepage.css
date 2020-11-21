@@ -271,3 +271,37 @@ body {
     padding: 1vh;
     text-align: center;
 }
+
+#add-image-file {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    white-space: nowrap;
+    width: 1px;
+}
+
+
+#add-image-file + label {
+    width: 25px;
+    height: 25px;
+    background-image: url('https://www.flaticon.com/premium-icon/icons/svg/3032/3032276.svg');
+    background-size: cover;
+}
+
+
+.post-button {
+    margin-left: 67%;
+    cursor: pointer;
+    padding: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 5px;
+    border: 1px solid rgb(207, 207, 207);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #424040;
+}
