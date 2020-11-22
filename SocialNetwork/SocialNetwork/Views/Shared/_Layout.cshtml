@@ -1,4 +1,10 @@
 ﻿
+@inject UserManager<User> userManager
+
+@{
+    User sessionUser = await userManager.GetUserAsync(User);
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +41,7 @@
             <div class="profile-wrapper">
                 <div class="profile-image-container">
                     <img class="profile-image"
-                         src="data:image/*; base64, @Model.ProfilePhoto" alt="">
+                         src="data:image/*; base64, @Convert.ToBase64String(sessionUser.ProfilePicture)" alt="">
                 </div>
                 <div class="profile-name">
                     <a class="links">
@@ -56,6 +62,6 @@
         </div>
     </div>
 
-    @RenderSection("Scripts", required:false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

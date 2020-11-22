@@ -1,5 +1,9 @@
-﻿using SocialNetwork.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Data;
+using SocialNetwork.Data.Models;
 using SocialNetwork.Repositories.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SocialNetwork.Repositories
 {
@@ -10,6 +14,20 @@ namespace SocialNetwork.Repositories
         public PostRepository(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public void CreatePost(Post post)
+        {
+            _context.Posts.Add(post);
+            _context.SaveChanges();
+        }
+
+        public IEnumerable<Post> GetAllPosts()
+        {
+            return _context.Posts
+                .Include(x => x.User)
+                .OrderByDescending(x => x.DateCreated)
+                .ToList();
         }
     }
 }

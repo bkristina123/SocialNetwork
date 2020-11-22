@@ -15,7 +15,7 @@ namespace SocialNetwork.Data.Models
 
         public byte[] ProfilePicture { get; set; }
 
-        public List<TextPost> TextPosts { get; set; }
+        public List<Post> Posts { get; set; }
 
     }
 }

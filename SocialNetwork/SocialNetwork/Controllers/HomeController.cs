@@ -1,32 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialNetwork.Common.Helpers;
 using SocialNetwork.Services.Interfaces;
-using System.Security.Claims;
 
 namespace SocialNetwork.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IPostService _postService;
 
-        public HomeController(IUserService userService)
+        public HomeController(IPostService postService)
         {
-            _userService = userService;
+            _postService = postService;
         }
 
         public IActionResult HomePage()
         {
+            var posts = _postService.GetAllPosts();
 
-         var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-         var currentUser = _userService.GetUserById(int.Parse(currentUserId));
-
-                if(currentUser is null)
-                {
-                    return RedirectToAction("Register", "Auth");
-                }
-
-            return View(currentUser.ConvertToHomepageUserDTO());
+            return View(posts);
 
         }
     }

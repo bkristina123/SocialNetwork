@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialNetwork.Data;
 
 namespace SocialNetwork.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201121235347_RemovedRequiredContent")]
+    partial class RemovedRequiredContent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,7 +122,7 @@ namespace SocialNetwork.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("SocialNetwork.Data.Models.Post", b =>
+            modelBuilder.Entity("SocialNetwork.Data.Models.TextPost", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -133,9 +135,6 @@ namespace SocialNetwork.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte[]>("PhotoContent")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -143,7 +142,7 @@ namespace SocialNetwork.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("TextPosts");
                 });
 
             modelBuilder.Entity("SocialNetwork.Data.Models.User", b =>
@@ -306,10 +305,10 @@ namespace SocialNetwork.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SocialNetwork.Data.Models.Post", b =>
+            modelBuilder.Entity("SocialNetwork.Data.Models.TextPost", b =>
                 {
                     b.HasOne("SocialNetwork.Data.Models.User", "User")
-                        .WithMany("Posts")
+                        .WithMany("TextPosts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -319,7 +318,7 @@ namespace SocialNetwork.Data.Migrations
 
             modelBuilder.Entity("SocialNetwork.Data.Models.User", b =>
                 {
-                    b.Navigation("Posts");
+                    b.Navigation("TextPosts");
                 });
 #pragma warning restore 612, 618
         }

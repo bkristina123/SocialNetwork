@@ -12,6 +12,6 @@ namespace SocialNetwork.Data
 
         }
 
-        public DbSet<TextPost> TextPosts { get; set; }
+        public DbSet<Post> Posts { get; set; }
     }
 }
