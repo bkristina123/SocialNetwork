@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using SocialNetwork.Common.Helpers;
+﻿using SocialNetwork.Common.Helpers;
 using SocialNetwork.Data.Models;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Repositories.Interfaces;
@@ -22,6 +21,11 @@ namespace SocialNetwork.Services
 
         public async Task CreatePost(User currentUser, HomepageViewDTO homepageViewDTO)
         {
+            if(homepageViewDTO.CreatePost.Content is null)
+            {
+                homepageViewDTO.CreatePost.Content = string.Empty;
+            }
+
             var post = new Post
             {
                 Content = homepageViewDTO.CreatePost.Content,
@@ -39,6 +43,13 @@ namespace SocialNetwork.Services
 
         public IEnumerable<Post> GetAllPosts()
         {
+            return _postRepository.GetAllPosts();
+        }
+
+
+        public IEnumerable<Post> GetPostsForUser(int id)
+        {
+            //finish logic
             return _postRepository.GetAllPosts();
         }
     }

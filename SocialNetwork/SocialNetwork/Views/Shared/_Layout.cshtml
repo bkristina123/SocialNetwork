@@ -18,9 +18,9 @@
 <body>
     <div class="body-container">
         <div class="navbar">
-            <div class="logo-container">
-                <img src="~/images/logo/889114.svg" class="logo" alt="logo">
-            </div>
+                <a class="logo-container" asp-controller="Home" asp-action="HomePage">
+                    <img src="~/images/logo/889114.svg" class="logo" alt="logo">
+                </a>
             <div class="search-bar">
                 <form class="example">
                     <input type="text" class="input" placeholder="Search people.." name="search">
@@ -38,13 +38,14 @@
                     <i class="fas fa-comments fa-lg"></i>
                 </div>
             </div>
+
             <div class="profile-wrapper">
                 <div class="profile-image-container">
                     <img class="profile-image"
                          src="data:image/*; base64, @Convert.ToBase64String(sessionUser.ProfilePicture)" alt="">
                 </div>
                 <div class="profile-name">
-                    <a class="links">
+                    <a class="links" asp-controller="Home" asp-action="Profile" asp-route-id="@sessionUser.Id">
                         @User.FindFirst("FirstName").Value  @User.FindFirst("LastName").Value
                     </a>
                 </div>

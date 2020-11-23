@@ -35,5 +35,13 @@ namespace SocialNetwork.Controllers
             return View(homepageViewModel);
 
         }
+
+        public IActionResult Profile(int id)
+        {
+            var user = _userService.GetUserById(id);
+
+            //get posts for user
+            return View(user.ConvertToProfileUserDTO());
+        }
     }
 }

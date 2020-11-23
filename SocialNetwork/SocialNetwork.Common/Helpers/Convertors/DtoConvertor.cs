@@ -1,5 +1,6 @@
 ﻿using SocialNetwork.Data.Models;
 using SocialNetwork.ModelDTOs.PostDTOs;
+using SocialNetwork.ModelDTOs.UserDTOs;
 using SocialNetwork.UserDTOs;
 using System;
 
@@ -34,6 +35,19 @@ namespace SocialNetwork.Common.Helpers
                 TextContent = post.Content,
                 DateCreated = post.DateCreated,
                 UserProfilePhoto = Convert.ToBase64String(post.User.ProfilePicture)
+            };
+        }
+
+
+        public static ProfileUserDTO ConvertToProfileUserDTO(this User user)
+        {
+            return new ProfileUserDTO
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                ProfilePhoto = Convert.ToBase64String(user.ProfilePicture),
+                Posts = user.Posts
             };
         }
     }
