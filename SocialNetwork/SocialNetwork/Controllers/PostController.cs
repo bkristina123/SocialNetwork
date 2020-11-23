@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Services.Interfaces;
-using System.Security.Claims;
 
 namespace SocialNetwork.Controllers
 {
@@ -17,14 +16,15 @@ namespace SocialNetwork.Controllers
             _userService = userService;
         }
 
-        public IActionResult CreatePost(string content, IFormFile photo)
+        [HttpPost]
+        public IActionResult CreatePost(HomepageViewDTO homepageViewDTO)
         {
 
-            var currentUser = _userService.GetUserById(int.Parse(User.
-                FindFirst(ClaimTypes.NameIdentifier)
-                .Value));
+            var currentUser = _userService.GetSessionUser();
 
-            _postService.CreatePost(currentUser, content, photo);
+            //fix image size problem
+            //fix empty posts
+            _postService.CreatePost(currentUser, homepageViewDTO);
 
             return RedirectToAction("HomePage", "Home");
         }

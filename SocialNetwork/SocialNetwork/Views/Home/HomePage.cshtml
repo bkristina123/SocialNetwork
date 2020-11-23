@@ -1,10 +1,4 @@
-﻿@model List<SocialNetwork.Data.Models.Post>
-
-@inject UserManager<User> userManager
-
-@{ 
-    User sessionUser = await userManager.GetUserAsync(User);
-}
+﻿@model SocialNetwork.ModelDTOs.ViewModelDTOs.HomepageViewDTO
 
 @{
     ViewData["Title"] = "Home Page";
@@ -85,17 +79,17 @@
                 <div class="post-username-image">
                     <div class="profile-image-container post-class">
                         <img class="profile-image"
-                             src="data:image/*; base64, @Convert.ToBase64String(sessionUser.ProfilePicture)" alt="">
+                             src="data:image/*; base64, @Model.SessionUser.ProfilePhoto" alt="">
                     </div>
                 </div>
                 <div class="post-something-container">
                     <div class="post-something-box">
-                        <input type="text" class="post-input" name="content" placeholder="What's on your mind, @sessionUser.FirstName?">
+                        <input type="text" class="post-input" asp-for="@Model.CreatePost.Content" placeholder="What's on your mind, @Model.SessionUser.FirstName?">
                     </div>
                 </div>
             </div>
             <div class="second-demo-class">
-                <input type="file" id="add-image-file" name="photo">
+                <input type="file" id="add-image-file" asp-for="@Model.CreatePost.Photo">
                 <label for="add-image-file"></label>
                 <div class="add-image-text">
                     Add Image
@@ -106,28 +100,28 @@
 
     </div>
 
-    @foreach (var post in Model)
+    @foreach (var post in Model.ViewPostList)
     {
         <div class="content-box">
             <div class="post-username-container">
                 <div class="post-username-image">
                     <div class="profile-image-container">
                         <img class="profile-image"
-                             src="data:image/*; base64, @Convert.ToBase64String(post.User.ProfilePicture)" alt="">
+                             src="data:image/*; base64, @post.UserProfilePhoto" alt="">
                     </div>
                 </div>
                 <div class="post-profile-name-container">
-                    @post.User.FirstName @post.User.LastName
+                    @post.UserFirstName @post.UserLastName
                 </div>
             </div>
             <div class="post-text-container">
-                @post.Content
+                @post.TextContent
 
             </div>
             <div class="post-media-container">
                 @if (post.PhotoContent != null)
                 {
-                    <img class="post-image" src="data:image/*; base64, @Convert.ToBase64String(post.PhotoContent)">
+                    <img class="post-image" src="data:image/*; base64, @post.PhotoContent">
 
                 }
             </div>
@@ -149,7 +143,7 @@
                 <div class="post-username-image comment-image">
                     <div class="profile-image-container">
                         <img class="profile-image"
-                             src="data:image/*; base64, @Convert.ToBase64String(sessionUser.ProfilePicture)" alt="">
+                             src="data:image/*; base64, @Model.SessionUser.ProfilePhoto" alt="">
                     </div>
                 </div>
                 <div class="comments-box-container">

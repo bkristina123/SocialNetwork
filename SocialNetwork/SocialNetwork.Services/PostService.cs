@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using SocialNetwork.Common.Helpers;
 using SocialNetwork.Data.Models;
+using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Repositories.Interfaces;
 using SocialNetwork.Services.Interfaces;
 using System;
@@ -18,23 +19,19 @@ namespace SocialNetwork.Services
             _postRepository = postRepository;
         }
 
-        public async Task CreatePost(User currentUser, string content, IFormFile photo)
-        {
-            if(content is null)
-            {
-                content = string.Empty;
-            }
 
+        public async Task CreatePost(User currentUser, HomepageViewDTO homepageViewDTO)
+        {
             var post = new Post
             {
-                Content = content,
+                Content = homepageViewDTO.CreatePost.Content,
                 DateCreated = DateTime.Now,
                 UserId = currentUser.Id
             };
 
-            if(photo != null)
+            if (homepageViewDTO.CreatePost.Photo != null)
             {
-                post.PhotoContent = await photo.ConvertImageToByte();
+                post.PhotoContent = await homepageViewDTO.CreatePost.Photo.ConvertImageToByte();
             }
 
             _postRepository.CreatePost(post);
