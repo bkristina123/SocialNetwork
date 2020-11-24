@@ -3,6 +3,7 @@ using SocialNetwork.ModelDTOs.PostDTOs;
 using SocialNetwork.ModelDTOs.UserDTOs;
 using SocialNetwork.UserDTOs;
 using System;
+using System.Linq;
 
 namespace SocialNetwork.Common.Helpers
 {
@@ -29,6 +30,7 @@ namespace SocialNetwork.Common.Helpers
 
             return new ViewPostDTO
             {
+                UserId = post.UserId,
                 UserFirstName = post.User.FirstName,
                 UserLastName = post.User.LastName,
                 PhotoContent = photoContent,
@@ -47,7 +49,6 @@ namespace SocialNetwork.Common.Helpers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 ProfilePhoto = Convert.ToBase64String(user.ProfilePicture),
-                Posts = user.Posts
             };
         }
     }

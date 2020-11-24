@@ -29,5 +29,14 @@ namespace SocialNetwork.Repositories
                 .OrderByDescending(x => x.DateCreated)
                 .ToList();
         }
+
+        public List<Post> GetPostsForUser(int id)
+        {
+            return _context.Posts
+                .Include(x => x.User)
+                .OrderByDescending(x => x.DateCreated)
+                .Where(x => x.UserId.Equals(id))
+                .ToList();
+        }
     }
 }

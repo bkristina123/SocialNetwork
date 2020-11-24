@@ -1,6 +1,5 @@
 ﻿@model SocialNetwork.ModelDTOs.UserDTOs.ProfileUserDTO
 
-
 @inject UserManager<User> userManager
 
 @{
@@ -21,7 +20,7 @@
          alt="">
     <div class="profile-photo-container">
         <img class="profile-photo-src"
-             src="@Model.ProfilePhoto"
+             src="data:image/*; base64, @Model.ProfilePhoto"
              alt="">
     </div>
 </div>
@@ -52,7 +51,6 @@
         </div>
     </div>
 </div>
-<!-- <div class="profile-content-container"> -->
 
 <div class="middle-bar">
 
@@ -63,22 +61,22 @@
                 <div class="post-username-image">
                     <div class="profile-image-container">
                         <img class="profile-image"
-                             src="@post.User.ProfilePicture"
+                             src="data:image/*; base64,@post.UserProfilePhoto"
                              alt="">
                     </div>
                 </div>
                 <div class="post-profile-name-container">
-                    @post.User.FirstName @post.User.LastName
+                    @post.UserFirstName @post.UserLastName
                 </div>
             </div>
 
             <div class="post-text-container">
-                @post.Content
+                @post.TextContent
             </div>
             <div class="post-media-container">
                 @if (post.PhotoContent != null)
                 {
-                    <img class="post-image" src="data:image/*; base64, @post.PhotoContent">
+                    <img class="post-image" src="data:image/*; base64,@post.PhotoContent">
 
                 }
             </div>
@@ -100,7 +98,7 @@
                 <div class="post-username-image comment-image">
                     <div class="profile-image-container">
                         <img class="profile-image"
-                             src="@sessionUser.ProfilePicture"
+                             src="data:image/*; base64, @Convert.ToBase64String(sessionUser.ProfilePicture)"
                              alt="">
                     </div>
                 </div>
@@ -112,4 +110,5 @@
             </div>
         </div>
     }
-    </div>
+</div>
+

@@ -111,7 +111,9 @@
                     </div>
                 </div>
                 <div class="post-profile-name-container">
-                    @post.UserFirstName @post.UserLastName
+                    <a class="links" asp-controller="Home" asp-action="Profile" asp-route-id="@post.UserId">
+                        @post.UserFirstName @post.UserLastName
+                    </a>
                 </div>
             </div>
             <div class="post-text-container">

@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Common.Helpers;
-using SocialNetwork.ModelDTOs.PostDTOs;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Services.Interfaces;
 using System.Linq;
@@ -26,8 +26,6 @@ namespace SocialNetwork.Controllers
             homepageViewModel.SessionUser = _userService.GetSessionUser()
                 .ConvertToHomepageUserDTO();
 
-            homepageViewModel.CreatePost = new CreatePostDTO();
-
             homepageViewModel.ViewPostList = _postService.GetAllPosts()
                 .Select(x => x.ConvertToViewPostDTO())
                 .ToList();
@@ -36,12 +34,30 @@ namespace SocialNetwork.Controllers
 
         }
 
+        [Route("profile/{id}")]
         public IActionResult Profile(int id)
         {
+
             var user = _userService.GetUserById(id);
 
-            //get posts for user
-            return View(user.ConvertToProfileUserDTO());
+            if (user is null)
+            {
+                return RedirectToAction(nameof(PageNotFound));
+            }
+
+            var userDTO = user.ConvertToProfileUserDTO();
+            userDTO.Posts = _postService.GetPostsForUser(user.Id).
+                Select(x => x.ConvertToViewPostDTO())
+                .ToList();
+
+            return View(userDTO);
+        }
+
+        [AllowAnonymous]
+        [Route("/pagenotfound")]
+        public IActionResult PageNotFound()
+        {
+            return View();
         }
     }
 }

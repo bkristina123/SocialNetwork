@@ -1,4 +1,4 @@
-﻿using SocialNetwork.Data.Models;
+﻿using SocialNetwork.ModelDTOs.PostDTOs;
 using System.Collections.Generic;
 
 namespace SocialNetwork.ModelDTOs.UserDTOs
@@ -9,6 +9,6 @@ namespace SocialNetwork.ModelDTOs.UserDTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ProfilePhoto { get; set; }
-        public List<Post> Posts { get; set; }
+        public List<ViewPostDTO> Posts { get; set; }
     }
 }

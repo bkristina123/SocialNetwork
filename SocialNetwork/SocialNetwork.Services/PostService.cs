@@ -47,10 +47,9 @@ namespace SocialNetwork.Services
         }
 
 
-        public IEnumerable<Post> GetPostsForUser(int id)
+        public List<Post> GetPostsForUser(int id)
         {
-            //finish logic
-            return _postRepository.GetAllPosts();
+            return _postRepository.GetPostsForUser(id);
         }
     }
 }
