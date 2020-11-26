@@ -318,3 +318,14 @@ body {
     font-size:small;
     margin-left:10%;
 }
+
+
+.section-item-blue {
+    color: rgb(202, 76, 53);
+    cursor: pointer;
+}
+
+.section-item-none {
+    color: inherit;
+    cursor:pointer;
+}

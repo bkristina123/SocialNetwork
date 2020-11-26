@@ -18,9 +18,9 @@
 <body>
     <div class="body-container">
         <div class="navbar">
-                <a class="logo-container" asp-controller="Home" asp-action="HomePage">
-                    <img src="~/images/logo/889114.svg" class="logo" alt="logo">
-                </a>
+            <a class="logo-container" asp-controller="Home" asp-action="HomePage">
+                <img src="~/images/logo/889114.svg" class="logo" alt="logo">
+            </a>
             <div class="search-bar">
                 <form class="example">
                     <input type="text" class="input" placeholder="Search people.." name="search">
@@ -64,5 +64,7 @@
     </div>
 
     @RenderSection("Scripts", required: false)
+    <script src="~/js/toggle.js"></script>
+    <script src="~/js/colorToggle.js"></script>
 </body>
 </html>
