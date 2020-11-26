@@ -16,7 +16,7 @@
 
 <div class="cover-photo-container">
     <img class="cover-image-src"
-         src="https://scontent.fskp1-1.fna.fbcdn.net/v/t1.0-9/10453448_10201410554264771_4072090167232290493_n.jpg?_nc_cat=103&ccb=2&_nc_sid=e3f864&_nc_ohc=TC-AAh-xETEAX_cJ3Wo&_nc_ht=scontent.fskp1-1.fna&oh=1a39d6cd47910d5ccc76ccefbe4e5cfe&oe=5FD07A55"
+         src="~/images/profile/download.jpg"
          alt="">
     <div class="profile-photo-container">
         <img class="profile-photo-src"
@@ -45,11 +45,23 @@
             Friends
         </div>
     </div>
-    <div class="action-button">
-        <div class="button">
-            Add Friend
+    @if (sessionUser.Id.Equals(Model.Id))
+    {
+        <div class="action-button">
+            <div class="button">
+                Edit Profile
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="action-button">
+            <div class="button">
+                Add Friend
+            </div>
+        </div>
+    }
+
 </div>
 
 <div class="middle-bar">
@@ -68,6 +80,9 @@
                 <div class="post-profile-name-container">
                     @post.UserFirstName @post.UserLastName
                 </div>
+                <div class="date-created-container">
+                    @post.DateCreated
+                </div>
             </div>
 
             <div class="post-text-container">
@@ -77,7 +92,6 @@
                 @if (post.PhotoContent != null)
                 {
                     <img class="post-image" src="data:image/*; base64,@post.PhotoContent">
-
                 }
             </div>
             <div class="post-comment-section">

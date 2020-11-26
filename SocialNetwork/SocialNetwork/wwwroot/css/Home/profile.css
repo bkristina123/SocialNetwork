@@ -247,4 +247,9 @@
     padding-top: 2%;
   
   }
-  
+
+.date-created-container {
+    color: gray;
+    font-size: xx-small;
+    margin-left: 50%;
+}

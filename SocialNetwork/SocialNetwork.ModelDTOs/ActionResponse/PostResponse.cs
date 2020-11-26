@@ -1,7 +1,6 @@
 ﻿namespace SocialNetwork.ModelDTOs.ActionResponse
 {
-    public class SignInResponse : Response
+    public class PostResponse : Response
     {
-
     }
 }

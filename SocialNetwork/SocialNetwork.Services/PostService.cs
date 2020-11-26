@@ -1,5 +1,6 @@
 ﻿using SocialNetwork.Common.Helpers;
 using SocialNetwork.Data.Models;
+using SocialNetwork.ModelDTOs.ActionResponse;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Repositories.Interfaces;
 using SocialNetwork.Services.Interfaces;
@@ -19,9 +20,19 @@ namespace SocialNetwork.Services
         }
 
 
-        public async Task CreatePost(User currentUser, HomepageViewDTO homepageViewDTO)
+        public async Task<PostResponse> CreatePost(User currentUser, HomepageViewDTO homepageViewDTO)
         {
-            if(homepageViewDTO.CreatePost.Content is null)
+
+            var postResponse = new PostResponse();
+
+            if(homepageViewDTO.CreatePost.Content is null && 
+                homepageViewDTO.CreatePost.Photo is null)
+            {
+                postResponse.ErrorMessage = "You must enter at least one of the fields";
+                return postResponse;
+            }
+
+            if (homepageViewDTO.CreatePost.Content is null)
             {
                 homepageViewDTO.CreatePost.Content = string.Empty;
             }
@@ -39,6 +50,8 @@ namespace SocialNetwork.Services
             }
 
             _postRepository.CreatePost(post);
+            postResponse.IsSuccesful = true;
+            return postResponse;
         }
 
         public IEnumerable<Post> GetAllPosts()

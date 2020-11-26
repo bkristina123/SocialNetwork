@@ -8,7 +8,6 @@
     <link href="~/css/Home/homepage.css" rel="stylesheet" />
 }
 
-
 <div class="left-bar-fixed">
     <div class="left-bar">
         <div class="options-wrapper">
@@ -74,7 +73,7 @@
 <div class="middle-bar">
 
     <div class="content-box">
-        <form asp-controller="Post" asp-action="CreatePost" enctype="multipart/form-data">
+        <form asp-controller="Post" asp-action="CreatePost" method="post" enctype="multipart/form-data">
             <div class="demo-class">
                 <div class="post-username-image">
                     <div class="profile-image-container post-class">
@@ -96,6 +95,9 @@
                 </div>
                 <input class="post-button" id="postButton" type="submit" value="Post" />
             </div>
+            <div class="error-message">
+                @TempData["Error"]
+            </div>
         </form>
 
     </div>
@@ -114,6 +116,9 @@
                     <a class="links" asp-controller="Home" asp-action="Profile" asp-route-id="@post.UserId">
                         @post.UserFirstName @post.UserLastName
                     </a>
+                </div>
+                <div class="date-created-container">
+                    @post.DateCreated.ToString()
                 </div>
             </div>
             <div class="post-text-container">

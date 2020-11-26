@@ -3,7 +3,6 @@ using SocialNetwork.ModelDTOs.PostDTOs;
 using SocialNetwork.ModelDTOs.UserDTOs;
 using SocialNetwork.UserDTOs;
 using System;
-using System.Linq;
 
 namespace SocialNetwork.Common.Helpers
 {

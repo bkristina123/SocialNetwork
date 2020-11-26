@@ -305,3 +305,16 @@ body {
     justify-content: center;
     color: #424040;
 }
+
+
+.date-created-container {
+    color: gray;
+    font-size:xx-small;
+    margin-left: 50%;
+}
+
+.error-message {
+    color: red;
+    font-size:small;
+    margin-left:10%;
+}

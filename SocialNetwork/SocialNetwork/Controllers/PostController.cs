@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SocialNetwork.Common.Helpers;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Services.Interfaces;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Controllers
 {
@@ -17,14 +20,18 @@ namespace SocialNetwork.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreatePost(HomepageViewDTO homepageViewDTO)
+        public async Task<IActionResult> CreatePost(HomepageViewDTO homepageViewDTO)
         {
 
             var currentUser = _userService.GetSessionUser();
 
             //fix image size problem
-            //fix empty posts
-            _postService.CreatePost(currentUser, homepageViewDTO);
+            var postResponse = await _postService.CreatePost(currentUser, homepageViewDTO);
+
+            if(!postResponse.IsSuccesful)
+            {
+                TempData["Error"] = postResponse.ErrorMessage;
+            }
 
             return RedirectToAction("HomePage", "Home");
         }

@@ -4,6 +4,7 @@ using SocialNetwork.Common.Helpers;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Services.Interfaces;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Controllers
 {
@@ -33,6 +34,7 @@ namespace SocialNetwork.Controllers
             return View(homepageViewModel);
 
         }
+
 
         [Route("profile/{id}")]
         public IActionResult Profile(int id)
