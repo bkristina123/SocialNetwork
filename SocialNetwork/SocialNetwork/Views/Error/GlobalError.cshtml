@@ -1,0 +1,30 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Error";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Shared/error.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="error-text">
+        <div>
+            An error has occured. Try again later!
+        </div>
+            <a class="button links" asp-controller="Home" asp-action="HomePage">
+                Back to Homepage
+            </a>
+    </div>
+</body>
+
+</html>
+

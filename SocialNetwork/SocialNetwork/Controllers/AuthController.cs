@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SocialNetwork.ModelDTOs.ActionResponse;
 using SocialNetwork.Services.Interfaces;
 using SocialNetwork.UserDTOs;
+using System;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Controllers
@@ -11,48 +13,73 @@ namespace SocialNetwork.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
+        private readonly IConfiguration _configuration;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService,
+            IConfiguration configuration)
         {
             _authService = authService;
+            _configuration = configuration;
         }
 
         [Route("/login")]
         public IActionResult Login()
-        
         {
-            var loginDTO = new LoginDTO();
-            return View(loginDTO);
+            try
+            {
+                var loginDTO = new LoginDTO();
+                return View(loginDTO);
+            }
+            catch (Exception)
+            {
+                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+            }
         }
 
         [HttpPost]
         [Route("/login")]
         public async Task<IActionResult> Login(LoginDTO loginDTO, string returnUrl)
         {
-            if(ModelState.IsValid)
+            try
             {
-                SignInResponse response = await _authService.LoginUserAsync(loginDTO);
-
-                if(response.IsSuccesful)
+                if (ModelState.IsValid)
                 {
-                    if(!string.IsNullOrEmpty(returnUrl))
+                    SignInResponse response = await _authService.LoginUserAsync(loginDTO);
+
+                    if (response.IsSuccesful)
                     {
-                        return LocalRedirect(returnUrl);
+                        if (!string.IsNullOrEmpty(returnUrl))
+                        {
+                            return LocalRedirect(returnUrl);
+                        }
+                        return RedirectToAction("HomePage", "Home");
                     }
-                    return RedirectToAction("HomePage", "Home");
+
+                    ModelState.AddModelError(string.Empty, response.ErrorMessage);
                 }
 
-                ModelState.AddModelError(string.Empty, response.ErrorMessage);
+                return View(loginDTO);
+            }
+            catch (Exception)
+            {
+                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
             }
 
-            return View(loginDTO);
         }
 
         [Route("/register")]
         public IActionResult Register()
         {
-            var registerDTO = new RegisterDTO();
-            return View(registerDTO);
+            try
+            {
+                var registerDTO = new RegisterDTO();
+                return View(registerDTO);
+            }
+            catch (Exception)
+            {
+                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+            }
+
         }
 
 
@@ -60,33 +87,46 @@ namespace SocialNetwork.Controllers
         [Route("/register")]
         public async Task<IActionResult> Register(RegisterDTO registerDTO)
         {
-            
-            if(!ModelState.IsValid)
+            try
             {
-                return View(registerDTO);
-            }
-
-            var result = await _authService.CreateUserAsync(registerDTO);
-
-            if (!result.Succeeded)
-            {
-                foreach (var errorMessage in result.Errors)
+                if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError(string.Empty, errorMessage.Description);
+                    return View(registerDTO);
                 }
 
-                return View(registerDTO);
-            }
+                var result = await _authService.CreateUserAsync(registerDTO);
 
-            return RedirectToAction(nameof(Login));
+                if (!result.Succeeded)
+                {
+                    foreach (var errorMessage in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, errorMessage.Description);
+                    }
+
+                    return View(registerDTO);
+                }
+
+                return RedirectToAction(nameof(Login));
+            }
+            catch (Exception)
+            {
+                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+            }
 
         }
 
 
         public async Task<IActionResult> Logout()
         {
-            await _authService.LogoutAsync();
-            return RedirectToAction(nameof(Login));
+            try
+            {
+                await _authService.LogoutAsync();
+                return RedirectToAction(nameof(Login));
+            }
+            catch (Exception)
+            {
+                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+            }
         }
     }
 }

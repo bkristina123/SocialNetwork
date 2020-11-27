@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SocialNetwork.Common.Helpers;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Services.Interfaces;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.Controllers
 {
@@ -12,27 +13,37 @@ namespace SocialNetwork.Controllers
     {
         private readonly IPostService _postService;
         private readonly IUserService _userService;
+        private readonly IConfiguration _configuration;
 
         public HomeController(IPostService postService,
-            IUserService userService)
+            IUserService userService,
+            IConfiguration configuration)
         {
             _postService = postService;
             _userService = userService;
+            _configuration = configuration;
         }
 
         public IActionResult HomePage()
         {
-            var homepageViewModel = new HomepageViewDTO();
+            try
+            {
+                var homepageViewModel = new HomepageViewDTO();
 
-            homepageViewModel.SessionUser = _userService.GetSessionUser()
-                .ConvertToHomepageUserDTO();
+                homepageViewModel.SessionUser = _userService.GetSessionUser()
+                    .ConvertToHomepageUserDTO();
 
-            homepageViewModel.ViewPostList = _postService.GetAllPosts()
-                .Select(x => x.ConvertToViewPostDTO())
-                .ToList();
+                homepageViewModel.ViewPostList = _postService.GetAllPosts()
+                    .Select(x => x.ConvertToViewPostDTO())
+                    .ToList();
 
-            return View(homepageViewModel);
+                return View(homepageViewModel);
+            }
+            catch (Exception)
+            {
+                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
 
+            }
         }
 
 
@@ -40,26 +51,29 @@ namespace SocialNetwork.Controllers
         public IActionResult Profile(int id)
         {
 
-            var user = _userService.GetUserById(id);
-
-            if (user is null)
+            try
             {
-                return RedirectToAction(nameof(PageNotFound));
+                var user = _userService.GetUserById(id);
+
+                if (user is null)
+                {
+                    return StatusCode(int.Parse(_configuration["NotFoundErrorCode"]));
+                }
+
+                var userDTO = user.ConvertToProfileUserDTO();
+                userDTO.Posts = _postService.GetPostsForUser(user.Id).
+                    Select(x => x.ConvertToViewPostDTO())
+                    .ToList();
+
+                return View(userDTO);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
             }
 
-            var userDTO = user.ConvertToProfileUserDTO();
-            userDTO.Posts = _postService.GetPostsForUser(user.Id).
-                Select(x => x.ConvertToViewPostDTO())
-                .ToList();
-
-            return View(userDTO);
         }
 
-        [AllowAnonymous]
-        [Route("/pagenotfound")]
-        public IActionResult PageNotFound()
-        {
-            return View();
-        }
-    }
+    }   
 }
