@@ -48,9 +48,9 @@
     @if (sessionUser.Id.Equals(Model.Id))
     {
         <div class="action-button">
-            <div class="button">
+            <a class="button links" asp-controller="User" asp-action="Edit" asp-route-id="@sessionUser.Id">
                 Edit Profile
-            </div>
+            </a>
         </div>
     }
     else

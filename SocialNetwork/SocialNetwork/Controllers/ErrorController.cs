@@ -16,13 +16,13 @@ namespace SocialNetwork.Controllers
             if(statusCode.Equals(404))
             {
                 TempData["ErrorMessage"] = "404 Page Not Found";
+
             } else
             {
                 return View("GlobalError");
             }
 
             return View();
-
         }
     }
 }

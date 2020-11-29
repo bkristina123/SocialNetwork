@@ -7,7 +7,12 @@
     font-family: "Poppins", sans-serif;
 
   }
-  
+
+
+.links:link, .links:visited {
+    color: #424040;
+    text-decoration: none;
+}
 
   body {
     background-color: rgb(247, 245, 245);

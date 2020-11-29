@@ -50,5 +50,16 @@ namespace SocialNetwork.Common.Helpers
                 ProfilePhoto = Convert.ToBase64String(user.ProfilePicture),
             };
         }
+
+
+        public static EditUserDTO ConvertToEditUserDTO(this User user)
+        {
+            return new EditUserDTO
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+            };
+        }
     }
 }

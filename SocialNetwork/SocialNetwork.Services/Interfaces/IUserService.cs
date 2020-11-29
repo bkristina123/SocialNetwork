@@ -1,4 +1,7 @@
-﻿using SocialNetwork.Data.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using SocialNetwork.Data.Models;
+using SocialNetwork.ModelDTOs.UserDTOs;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Interfaces
 {
@@ -6,5 +9,6 @@ namespace SocialNetwork.Services.Interfaces
     {
         User GetUserById(int id);
         User GetSessionUser();
+        Task<IdentityResult> UpdateUser(EditUserDTO editUserDTO);
     }
 }
