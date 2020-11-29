@@ -10,5 +10,6 @@ namespace SocialNetwork.Services.Interfaces
         User GetUserById(int id);
         User GetSessionUser();
         Task<IdentityResult> UpdateUser(EditUserDTO editUserDTO);
+        Task<IdentityResult> ChangePassword(ChangePasswordDTO changePasswordDTO);
     }
 }

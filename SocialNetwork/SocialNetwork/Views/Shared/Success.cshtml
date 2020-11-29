@@ -1,0 +1,29 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Success";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Shared/error.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="error-text">
+        <div>
+           Success
+        </div>
+        <a class="button links" asp-controller="Home" asp-action="HomePage">
+          Go to Homepage
+        </a>
+    </div>
+</body>
+
+</html>

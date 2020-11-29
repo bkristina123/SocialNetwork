@@ -25,6 +25,13 @@ namespace SocialNetwork.Services
             _userManager = userManager;
         }
 
+        public async Task<IdentityResult> ChangePassword(ChangePasswordDTO changePasswordDTO)
+        {
+            var sessionUser = GetSessionUser();
+            var response = await _userManager.ChangePasswordAsync(sessionUser, changePasswordDTO.OldPassword, changePasswordDTO.NewPassword);
+            return response;
+        }
+
         public User GetSessionUser()
         {
             var id = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);

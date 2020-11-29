@@ -16,41 +16,46 @@
         <div class="inputs-container">
             <label class="label" for="firstName"> First Name</label>
             <input asp-for="@Model.FirstName" class="textInput" type="text" id="firstName">
+            <span asp-validation-for="@Model.FirstName"></span>
+
         </div>
 
         <div class="inputs-container">
             <label class="label" for="lastName">Last Name</label>
             <input asp-for="@Model.LastName" class="textInput" type="text" id="lastName">
+            <span asp-validation-for="@Model.LastName"></span>
         </div>
 
         <div class="inputs-container">
             <label class="label" for="profilePhoto">Profile Photo</label>
             <input asp-for="@Model.ProfilePhoto" type="file">
+            <span asp-validation-for="@Model.ProfilePhoto"></span>
         </div>
-
         <div class="inputs-container">
             <input class="submitButton" type="submit" value="Submit">
         </div>
-        <div asp-validation-summary="ModelOnly"></div>
     </form>
 
-    <form class="formContent">
+    <form class="formContent" asp-controller="User" asp-action="ChangePassword" method="post">
         <div class="inputs-container">
             <label class="label" for="oldPassword"> Old Password</label>
-            <input class="textInput" type="text" id="oldPassword">
+            <input class="textInput" name="OldPassword" type="password" id="oldPassword">
         </div>
 
         <div class="inputs-container">
             <label class="label" for="newPassword"> New Password</label>
-            <input class="textInput" type="text" id="newPassword">
+            <input class="textInput" name="NewPassword" type="password" id="newPassword">
         </div>
         <div class="inputs-container">
             <label class="label" for="confirmPass"> Confirm New Password</label>
-            <input class="textInput" type="text" id="confirmPass">
+            <input class="textInput" name="ConfirmPassword" type="password" id="confirmPass">
         </div>
 
         <div class="inputs-container">
             <input class="submitButton" type="submit" value="Change">
+        </div>
+        <div asp-validation-summary="All">
+            
         </div>
     </form>
 

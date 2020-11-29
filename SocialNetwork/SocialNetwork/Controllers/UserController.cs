@@ -4,6 +4,7 @@ using SocialNetwork.Common.Helpers;
 using SocialNetwork.ModelDTOs.UserDTOs;
 using SocialNetwork.Services.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Controllers
@@ -29,7 +30,7 @@ namespace SocialNetwork.Controllers
                 var user = _userService.GetUserById(id)
                     .ConvertToEditUserDTO();
 
-                if(sessionUser.Id != user.Id)
+                if (sessionUser.Id != user.Id)
                 {
                     return RedirectToAction("HomePage", "Home");
                 }
@@ -44,7 +45,7 @@ namespace SocialNetwork.Controllers
         }
 
         [HttpPost]
-        public async Task <IActionResult> Edit(EditUserDTO editUserDTO)
+        public async Task<IActionResult> Edit(EditUserDTO editUserDTO)
         {
             try
             {
@@ -71,7 +72,33 @@ namespace SocialNetwork.Controllers
                 return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
             }
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDTO changePasswordDTO)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("Edit");
+            }
+
+            var response = await _userService.ChangePassword(changePasswordDTO);
+
+            if (!response.Succeeded)
+            {
+                foreach (var errorMessage in response.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, errorMessage.Description);
+                }
+
+                return View("Edit");
+            }
+
+            return View("Success");
+
+        }
     }
 }
+
 
 
