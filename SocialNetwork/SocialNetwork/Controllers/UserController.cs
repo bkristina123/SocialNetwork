@@ -77,25 +77,31 @@ namespace SocialNetwork.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordDTO changePasswordDTO)
         {
-            if(!ModelState.IsValid)
+            try
             {
-                return View("Edit");
-            }
-
-            var response = await _userService.ChangePassword(changePasswordDTO);
-
-            if (!response.Succeeded)
-            {
-                foreach (var errorMessage in response.Errors)
+                if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError(string.Empty, errorMessage.Description);
+                    return View("Edit");
                 }
 
-                return View("Edit");
+                var response = await _userService.ChangePassword(changePasswordDTO);
+
+                if (!response.Succeeded)
+                {
+                    foreach (var errorMessage in response.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, errorMessage.Description);
+                    }
+
+                    return View("Edit");
+                }
+
+                return View("Success");
             }
-
-            return View("Success");
-
+            catch (Exception)
+            {
+                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+            }
         }
     }
 }
