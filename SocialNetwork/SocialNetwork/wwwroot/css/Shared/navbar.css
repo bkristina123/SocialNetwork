@@ -144,3 +144,20 @@
 .notifications, .settings {
   color:#424040;
 }
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(226, 223, 223);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #cfcaca;
+}

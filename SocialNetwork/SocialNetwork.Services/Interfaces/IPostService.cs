@@ -11,5 +11,6 @@ namespace SocialNetwork.Services.Interfaces
         Task<PostResponse> CreatePost(User currentUser, HomepageViewDTO homepageViewDTO);
         IEnumerable<Post> GetAllPosts();
         List<Post> GetPostsForUser(int id);
+        Post GetPostById(int id);
     }
 }

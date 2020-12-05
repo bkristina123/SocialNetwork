@@ -59,6 +59,10 @@ namespace SocialNetwork.Services
             return _postRepository.GetAllPosts();
         }
 
+        public Post GetPostById(int id)
+        {
+            return _postRepository.GetPostById(id);
+        }
 
         public List<Post> GetPostsForUser(int id)
         {

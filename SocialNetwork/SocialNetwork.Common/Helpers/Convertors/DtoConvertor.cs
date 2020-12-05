@@ -29,6 +29,7 @@ namespace SocialNetwork.Common.Helpers
 
             return new ViewPostDTO
             {
+                Id = post.Id,
                 UserId = post.UserId,
                 UserFirstName = post.User.FirstName,
                 UserLastName = post.User.LastName,

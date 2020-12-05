@@ -8,5 +8,6 @@ namespace SocialNetwork.Repositories.Interfaces
         void CreatePost(Post post);
         IEnumerable<Post> GetAllPosts();
         List<Post> GetPostsForUser(int id);
+        Post GetPostById(int id);
     }
 }

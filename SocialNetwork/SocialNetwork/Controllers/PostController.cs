@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SocialNetwork.Common.Helpers;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Services.Interfaces;
 using System;
@@ -44,6 +45,25 @@ namespace SocialNetwork.Controllers
                 return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
             }
 
+        }
+
+        public IActionResult Overview(int postId)
+        {
+            try
+            {
+                var post = _postService.GetPostById(postId);
+
+                if (post is null)
+                {
+                    return StatusCode(int.Parse(_configuration["NotFoundErrorCode"]));
+                }
+
+                return View(post.ConvertToViewPostDTO());
+            }
+            catch (Exception)
+            {
+                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+            }
         }
     }
 }

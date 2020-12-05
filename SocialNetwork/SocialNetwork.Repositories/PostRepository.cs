@@ -30,6 +30,13 @@ namespace SocialNetwork.Repositories
                 .ToList();
         }
 
+        public Post GetPostById(int id)
+        {
+            return _context.Posts
+                .Include(x => x.User)
+                .FirstOrDefault(x => x.Id.Equals(id));
+        }
+
         public List<Post> GetPostsForUser(int id)
         {
             return _context.Posts
