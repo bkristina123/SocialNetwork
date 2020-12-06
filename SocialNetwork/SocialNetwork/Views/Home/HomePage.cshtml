@@ -44,64 +44,8 @@
 
         @foreach (var post in Model.ViewPostList)
         {
-            <div class="content-box">
-                <div class="post-username-container">
-                    <div class="post-username-image">
-                        <div class="profile-image-container">
-                            <img class="profile-image"
-                                 src="data:image/*; base64, @post.UserProfilePhoto" alt="">
-                        </div>
-                    </div>
-                    <div class="post-profile-name-container">
-                        <a class="links" asp-controller="Home" asp-action="Profile" asp-route-id="@post.UserId">
-                            @post.UserFirstName @post.UserLastName
-                        </a>
-                    </div>
-                    <div class="date-created-container">
-                        @post.DateCreated.ToString()
-                    </div>
-                </div>
-                <a class="post-text-container links" asp-controller="Post" asp-action="Overview" asp-route-postId="@post.Id">
-                    @post.TextContent
-
-                </a>
-                <a asp-controller="Post" asp-action="Overview" asp-route-postId="@post.Id" class="post-media-container links">
-                    @if (post.PhotoContent != null)
-                    {
-                        <img class="post-image" src="data:image/*; base64, @post.PhotoContent">
-
-                    }
-                </a>
-                <div class="post-comment-section">
-                    <div class="section-item-none" id="like-item">
-                        <i class="far fa-thumbs-up fa-lg"></i>
-                        Like
-                    </div>
-                    <div class="comment-section" id="comment-item">
-                        <i class="far fa-comment fa-lg"></i>
-                        Comment
-                    </div>
-                    <div class="section-item-none" id="share-item">
-                        <i class="fas fa-share fa-lg"></i>
-                        Share
-                    </div>
-                </div>
-                <div class="add-comments">
-                    <div class="post-username-image comment-image">
-                        <div class="profile-image-container">
-                            <img class="profile-image"
-                                 src="data:image/*; base64, @Model.SessionUser.ProfilePhoto" alt="">
-                        </div>
-                    </div>
-                    <div class="comments-box-container">
-                        <form class="comments-box">
-                            <input type="text" class="comment-input" placeholder="Add Comment..">
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <partial name="_ViewPostPartial" model="post"/>
         }
-
     </div>
 
     <div class="right-bar">

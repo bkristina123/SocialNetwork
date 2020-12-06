@@ -60,7 +60,7 @@ namespace SocialNetwork.Controllers
                 }
 
                 var userDTO = user.ConvertToProfileUserDTO();
-                userDTO.Posts = _postService.GetPostsForUser(user.Id).
+                userDTO.Posts = _postService.GetPostsOfUser(user.Id).
                     Select(x => x.ConvertToViewPostDTO())
                     .ToList();
 

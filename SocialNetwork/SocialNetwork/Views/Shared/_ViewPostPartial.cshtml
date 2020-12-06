@@ -1,0 +1,64 @@
+﻿@inject UserManager<User> userManager
+
+@model SocialNetwork.ModelDTOs.PostDTOs.ViewPostDTO
+
+@{
+    User sessionUser = await userManager.GetUserAsync(User);
+}
+
+
+<div class="content-box">
+    <div class="post-username-container">
+        <div class="post-username-image">
+            <div class="profile-image-container">
+                <img class="profile-image"
+                     src="data:image/*; base64, @Model.UserProfilePhoto" alt="">
+            </div>
+        </div>
+        <div class="post-profile-name-container">
+            <a class="links" asp-controller="Home" asp-action="Profile" asp-route-id="@Model.UserId">
+                @Model.UserFirstName @Model.UserLastName
+            </a>
+        </div>
+        <div class="date-created-container">
+            @Model.DateCreated.ToString()
+        </div>
+    </div>
+    <a class="post-text-container links" asp-controller="Post" asp-action="Overview" asp-route-postId="@Model.Id">
+        @Model.TextContent
+
+    </a>
+    <a class="post-media-container links" asp-controller="Post" asp-action="Overview" asp-route-postId="@Model.Id">
+        @if (Model.PhotoContent != null)
+        {
+            <img class="post-image" src="data:image/*; base64, @Model.PhotoContent">
+        }
+    </a>
+    <div class="post-comment-section">
+        <div class="section-item-none" id="like-item">
+            <i class="far fa-thumbs-up fa-lg"></i>
+            Like
+        </div>
+        <div class="comment-section" id="comment-item">
+            <i class="far fa-comment fa-lg"></i>
+            Comment
+        </div>
+        <div class="section-item-none" id="share-item">
+            <i class="fas fa-share fa-lg"></i>
+            Share
+        </div>
+    </div>
+    <div class="add-comments">
+        <div class="post-username-image comment-image">
+            <div class="profile-image-container">
+                <img class="profile-image"
+                     src="data:image/*; base64, @Convert.ToBase64String(sessionUser.ProfilePicture)" alt="">
+            </div>
+        </div>
+        <div class="comments-box-container">
+            <form class="comments-box">
+                <input type="text" class="comment-input" placeholder="Add Comment..">
+            </form>
+        </div>
+    </div>
+</div>

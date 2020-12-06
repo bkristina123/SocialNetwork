@@ -64,7 +64,7 @@ namespace SocialNetwork.Services
             return _postRepository.GetPostById(id);
         }
 
-        public List<Post> GetPostsForUser(int id)
+        public List<Post> GetPostsOfUser(int id)
         {
             return _postRepository.GetPostsForUser(id);
         }
