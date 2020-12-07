@@ -1,4 +1,5 @@
-﻿
+﻿@model SocialNetwork.ModelDTOs.ViewModelDTOs.ManageNetworkViewDTO
+
 @section Styles {
     <link href="~/css/Network/network.css" rel="stylesheet" />
 }
@@ -10,45 +11,22 @@
     <div class="fr-table">
         <table class="table">
             <tbody>
-                <tr>
-                    <td>
-                        <img src="https://ychef.files.bbci.co.uk/976x549/p01j3hhk.jpg" class="profile-img"
-                             alt="">
-                    </td>
-                    <td>Kristina Bojchevska</td>
-                    <td>
-                        <div class="accept-button">Accept</div>
-                    </td>
-                    <td>
-                        <div class="decline-button">Decline</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="https://townsquare.media/site/622/files/2017/03/val_featured.jpg?w=980&q=75"
-                             class="profile-img" alt="">
-                    </td>
-                    <td>Viktorija Petreska</td>
-                    <td>
-                        <div class="accept-button">Accept</div>
-                    </td>
-                    <td>
-                        <div class="decline-button">Decline</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="https://scontent.fskp1-1.fna.fbcdn.net/v/t1.0-9/72855541_10210941506652624_4861907871039750144_n.jpg?_nc_cat=101&ccb=2&_nc_sid=09cbfe&_nc_ohc=u0k-gs_vzrIAX8EXi1v&_nc_ht=scontent.fskp1-1.fna&oh=72272e9be7bf97a51eebdfed244fe6de&oe=5FF05D9E"
-                             class="profile-img" alt="">
-                    </td>
-                    <td>Kristijan Kalemdzik</td>
-                    <td>
-                        <div class="accept-button">Accept</div>
-                    </td>
-                    <td>
-                        <div class="decline-button">Decline</div>
-                    </td>
-                </tr>
+                @foreach (var friendRequest in Model.FriendRequests)
+                {
+                    <tr>
+                        <td>
+                            <img src="data:image/*; base64, @Convert.ToBase64String(friendRequest.FromUser.ProfilePicture)" class="profile-img"
+                                 alt="">
+                        </td>
+                        <td>@friendRequest.FromUser.FirstName @friendRequest.FromUser.LastName</td>
+                        <td>
+                            <div class="accept-button">Accept</div>
+                        </td>
+                        <td>
+                            <div class="decline-button">Decline</div>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

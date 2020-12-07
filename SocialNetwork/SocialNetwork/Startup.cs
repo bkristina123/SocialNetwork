@@ -49,6 +49,9 @@ namespace SocialNetwork
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IPostRepository, PostRepository>();
 
+            services.AddScoped<INetworkService, NetworkService>();
+            services.AddScoped<INetworkRepository, NetworkRepository>();
+
             services.AddScoped<IUserClaimsPrincipalFactory<User>, AppUserClaimsPrincipalFactory>();
 
             services.AddControllersWithViews();
@@ -77,8 +80,6 @@ namespace SocialNetwork
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-
 
             app.UseRouting();
 
