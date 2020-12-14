@@ -20,21 +20,23 @@ namespace SocialNetwork.Services
         public IEnumerable<FriendRequest> GetFriendRequests()
         {
             var sessionUser = _userService.GetSessionUser();
-
             return _networkRepository.GetFriendRequests(sessionUser);
         }
 
         public void SendFriendRequest(int targetUserId)
         {
             var sessionUser = _userService.GetSessionUser();
-
-            var request = new FriendRequest
+            var targetUser = _userService.GetUserById(targetUserId);
             {
-                FromUserId = sessionUser.Id,
-                ToUserId = targetUserId
-            };
+                var request = new FriendRequest
+                {
+                    FromUserId = sessionUser.Id,
+                    ToUserId = targetUserId
+                };
 
-            _networkRepository.SendFriendRequest(request);
+                _networkRepository.SendFriendRequest(request);
+            }
+
         }
     }
 }

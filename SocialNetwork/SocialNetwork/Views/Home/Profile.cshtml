@@ -52,14 +52,13 @@
                 Edit Profile
             </a>
         </div>
-    }
-    else
+    } else 
     {
-        <div class="action-button">
-            <a class="button links" asp-controller="Network" asp-action="SendFriendRequest" asp-route-targetUserId="@Model.Id">
-                Add Friend
-            </a>
-        </div>
+    <div class="action-button">
+        <a class="button links" asp-controller="Network" asp-action="SendFriendRequest" asp-route-targetUserId="@Model.Id">
+            Add Friend
+        </a>
+    </div>
     }
 
 </div>

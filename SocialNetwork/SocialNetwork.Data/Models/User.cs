@@ -6,6 +6,7 @@ namespace SocialNetwork.Data.Models
 {
     public class User : IdentityUser<int>
     {
+
         [Required]
         [MaxLength(30)]
         public string FirstName { get; set; }
@@ -18,8 +19,6 @@ namespace SocialNetwork.Data.Models
         public List<Post> Posts { get; set; }
 
         public List<User> Friends { get; set; }
-
-        //public List<FriendRequest> FriendRequests { get; set; }
 
     }
 }

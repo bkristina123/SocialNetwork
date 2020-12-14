@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using SocialNetwork.ModelDTOs.ActionResponse;
 using SocialNetwork.Services.Interfaces;
 using SocialNetwork.UserDTOs;
@@ -13,13 +13,11 @@ namespace SocialNetwork.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
-        private readonly IConfiguration _configuration;
 
-        public AuthController(IAuthService authService,
-            IConfiguration configuration)
+        public AuthController(IAuthService authService)
         {
             _authService = authService;
-            _configuration = configuration;
+            //add loger
         }
 
         [Route("/login")]
@@ -27,12 +25,11 @@ namespace SocialNetwork.Controllers
         {
             try
             {
-                var loginDTO = new LoginDTO();
-                return View(loginDTO);
+                return View();
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -62,7 +59,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
         }
@@ -72,12 +69,12 @@ namespace SocialNetwork.Controllers
         {
             try
             {
-                var registerDTO = new RegisterDTO();
-                return View(registerDTO);
+                var register = new RegisterDTO();
+                return View(register);
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
         }
@@ -110,7 +107,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
         }
@@ -125,7 +122,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

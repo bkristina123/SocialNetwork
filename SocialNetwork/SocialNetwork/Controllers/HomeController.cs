@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Common.Helpers;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Services.Interfaces;
@@ -12,15 +12,12 @@ namespace SocialNetwork.Controllers
     {
         private readonly IPostService _postService;
         private readonly IUserService _userService;
-        private readonly IConfiguration _configuration;
 
         public HomeController(IPostService postService,
-            IUserService userService,
-            IConfiguration configuration)
+            IUserService userService)
         {
             _postService = postService;
             _userService = userService;
-            _configuration = configuration;
         }
 
         public IActionResult HomePage()
@@ -40,7 +37,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
 
             }
         }
@@ -56,7 +53,7 @@ namespace SocialNetwork.Controllers
 
                 if (user is null)
                 {
-                    return StatusCode(int.Parse(_configuration["NotFoundErrorCode"]));
+                    return StatusCode(StatusCodes.Status404NotFound);
                 }
 
                 var userDTO = user.ConvertToProfileUserDTO();
@@ -69,7 +66,7 @@ namespace SocialNetwork.Controllers
             catch (Exception)
             {
 
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
         }
