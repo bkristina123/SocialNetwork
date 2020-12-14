@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SocialNetwork.Common.Helpers;
 using SocialNetwork.ModelDTOs.UserDTOs;
@@ -12,13 +13,10 @@ namespace SocialNetwork.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        private readonly IConfiguration _configuration;
 
-        public UserController(IUserService userService,
-            IConfiguration configuration)
+        public UserController(IUserService userService)
         {
             _userService = userService;
-            _configuration = configuration;
         }
 
         public IActionResult Edit(int id)
@@ -39,7 +37,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
         }
@@ -69,7 +67,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -100,7 +98,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

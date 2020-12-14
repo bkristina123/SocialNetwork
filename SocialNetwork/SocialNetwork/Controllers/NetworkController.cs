@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Services.Interfaces;
@@ -9,13 +10,10 @@ namespace SocialNetwork.Controllers
     public class NetworkController : Controller
     {
         private readonly INetworkService _networkService;
-        private readonly IConfiguration _configuration;
 
-        public NetworkController(INetworkService networkService,
-            IConfiguration configuration)
+        public NetworkController(INetworkService networkService)
         {
             _networkService = networkService;
-            _configuration = configuration;
         }
 
         [Route("/network")]
@@ -33,7 +31,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -46,7 +44,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SocialNetwork.Common.Helpers;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
@@ -12,15 +13,12 @@ namespace SocialNetwork.Controllers
     {
         private readonly IPostService _postService;
         private readonly IUserService _userService;
-        private readonly IConfiguration _configuration;
 
         public PostController(IPostService postService,
-            IUserService userService,
-            IConfiguration configuration)
+            IUserService userService)
         {
             _postService = postService;
             _userService = userService;
-            _configuration = configuration;
         }
 
         [HttpPost]
@@ -42,7 +40,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
         }
@@ -55,14 +53,14 @@ namespace SocialNetwork.Controllers
 
                 if (post is null)
                 {
-                    return StatusCode(int.Parse(_configuration["NotFoundErrorCode"]));
+                    return StatusCode(StatusCodes.Status404NotFound);
                 }
 
                 return View(post.ConvertToViewPostDTO());
             }
             catch (Exception)
             {
-                return StatusCode(int.Parse(_configuration["GlobalErrorCode"]));
+                return StatusCode(StatusCodes.Status404NotFound);
             }
         }
     }

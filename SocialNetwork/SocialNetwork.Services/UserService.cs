@@ -35,9 +35,7 @@ namespace SocialNetwork.Services
         public User GetSessionUser()
         {
             var id = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
             var user = GetUserById(int.Parse(id));
-
             return user;
         }
 
@@ -48,11 +46,11 @@ namespace SocialNetwork.Services
 
         public async Task<IdentityResult> UpdateUser(EditUserDTO editUserDTO)
         {
-            var targetUser = _userRepository.GetUserById(editUserDTO.Id);
+            var updateModel = _userRepository.GetUserById(editUserDTO.Id);
 
-            targetUser = await editUserDTO.UpdateToUser(targetUser);
+            updateModel = await editUserDTO.UpdateToUser(updateModel);
 
-            var response = await _userManager.UpdateAsync(targetUser);
+            var response = await _userManager.UpdateAsync(updateModel);
 
             return response;
         }
