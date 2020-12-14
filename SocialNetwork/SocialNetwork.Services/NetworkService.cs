@@ -26,7 +26,6 @@ namespace SocialNetwork.Services
         public void SendFriendRequest(int targetUserId)
         {
             var sessionUser = _userService.GetSessionUser();
-            var targetUser = _userService.GetUserById(targetUserId);
             {
                 var request = new FriendRequest
                 {
@@ -34,9 +33,26 @@ namespace SocialNetwork.Services
                     ToUserId = targetUserId
                 };
 
-                _networkRepository.SendFriendRequest(request);
+                var relationExists = CheckFriendRelation(sessionUser.Id, targetUserId);
+
+                if(!relationExists)
+                {
+                    _networkRepository.SendFriendRequest(request);
+                }
+                return;
+            }
+        }
+
+        private bool CheckFriendRelation(int sessionUserId, int targetUserId)
+        {
+            var requestCheckModel = _networkRepository.GetRequestForUsers(sessionUserId, targetUserId);
+
+            if(requestCheckModel != null)
+            {
+                return true;
             }
 
+            return false;
         }
     }
 }

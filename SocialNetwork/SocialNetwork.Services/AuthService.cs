@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using SocialNetwork.Common.Helpers;
 using SocialNetwork.Data.Models;
 using SocialNetwork.ModelDTOs.ActionResponse;
@@ -12,12 +13,15 @@ namespace SocialNetwork.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IConfiguration _configuration;
 
         public AuthService(UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _configuration = configuration;
         }
 
         public async Task<IdentityResult> CreateUserAsync(RegisterDTO registerDTO)
@@ -36,7 +40,7 @@ namespace SocialNetwork.Services
 
             if(user is null)
             {
-                response.ErrorMessage = $"User with e-mail {loginDTO.Email} doesn't exist";
+                response.ErrorMessage = _configuration["ErrorMessages:UserExistError"];
                 return response;
             }
 
@@ -44,7 +48,7 @@ namespace SocialNetwork.Services
 
             if (passResult.Equals(PasswordVerificationResult.Failed))
             {
-                response.ErrorMessage = "Invalid password";
+                response.ErrorMessage = _configuration["ErrorMessages:InvalidPassError"];
                 return response;
             }
 
@@ -52,7 +56,7 @@ namespace SocialNetwork.Services
 
             if(!signInResult.Succeeded)
             {
-                response.ErrorMessage = "Failed Login. Try Again!";
+                response.ErrorMessage = _configuration["ErrorMessages:FailedLoginError"];
                 return response;
             }
 

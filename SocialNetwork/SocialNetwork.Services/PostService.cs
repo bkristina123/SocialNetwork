@@ -1,4 +1,5 @@
-﻿using SocialNetwork.Common.Helpers;
+﻿using Microsoft.Extensions.Configuration;
+using SocialNetwork.Common.Helpers;
 using SocialNetwork.Data.Models;
 using SocialNetwork.ModelDTOs.ActionResponse;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
@@ -13,10 +14,14 @@ namespace SocialNetwork.Services
     public class PostService : IPostService
     {
         private readonly IPostRepository _postRepository;
+        private readonly IConfiguration _configuration;
 
-        public PostService(IPostRepository postRepository)
+        public PostService(IPostRepository postRepository,
+            IConfiguration configuration)
         {
             _postRepository = postRepository;
+            _configuration = configuration;
+            
         }
 
 
@@ -28,7 +33,7 @@ namespace SocialNetwork.Services
             if(homepageViewDTO.CreatePost.Content is null && 
                 homepageViewDTO.CreatePost.Photo is null)
             {
-                postResponse.ErrorMessage = "You must enter at least one of the fields";
+                postResponse.ErrorMessage = _configuration["ErrorMessages:PostErrorMessage"];
                 return postResponse;
             }
 

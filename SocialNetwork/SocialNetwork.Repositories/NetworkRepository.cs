@@ -24,6 +24,15 @@ namespace SocialNetwork.Repositories
                 .ToList();
         }
 
+        public FriendRequest GetRequestForUsers(int sessionUserId, int targetUserId)
+        {
+            return _context.FriendRequests
+                .FirstOrDefault(x=> x.FromUserId.Equals(sessionUserId) 
+                && x.ToUserId.Equals(targetUserId) ||
+                x.FromUserId.Equals(targetUserId) 
+                && x.ToUserId.Equals(sessionUserId));
+        }
+
         public void SendFriendRequest(FriendRequest request)
         {
             _context.FriendRequests.Add(request);

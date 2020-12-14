@@ -7,5 +7,6 @@ namespace SocialNetwork.Repositories.Interfaces
     {
         void SendFriendRequest(FriendRequest request);
         IEnumerable<FriendRequest> GetFriendRequests(User sessionUser);
+        FriendRequest GetRequestForUsers(int sessionUserId, int targetUserId);
     }
 }
