@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using SocialNetwork.Common.Helpers;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Services.Interfaces;

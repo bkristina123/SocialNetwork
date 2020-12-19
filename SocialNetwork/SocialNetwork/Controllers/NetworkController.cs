@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Services.Interfaces;
 using System;
@@ -35,6 +34,7 @@ namespace SocialNetwork.Controllers
             }
         }
 
+
         public IActionResult SendFriendRequest(int targetUserId)
         {
             try
@@ -46,6 +46,18 @@ namespace SocialNetwork.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+        }
+
+        public IActionResult AcceptRequest(int requestId)
+        {
+            _networkService.AcceptRequest(requestId);
+            return RedirectToAction(nameof(ManageNetwork));
+        }
+
+        public IActionResult DeclineRequest(int requestId)
+        {
+            _networkService.DeclineRequest(requestId);
+            return RedirectToAction(nameof(ManageNetwork));
         }
     }
 }

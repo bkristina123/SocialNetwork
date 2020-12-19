@@ -1,4 +1,5 @@
-﻿using SocialNetwork.ModelDTOs.PostDTOs;
+﻿using SocialNetwork.Data.Enums;
+using SocialNetwork.ModelDTOs.PostDTOs;
 using System.Collections.Generic;
 
 namespace SocialNetwork.ModelDTOs.UserDTOs
@@ -10,5 +11,6 @@ namespace SocialNetwork.ModelDTOs.UserDTOs
         public string LastName { get; set; }
         public string ProfilePhoto { get; set; }
         public List<ViewPostDTO> Posts { get; set; }
+        public RelationType UsersRelation { get; set; }
     }
 }

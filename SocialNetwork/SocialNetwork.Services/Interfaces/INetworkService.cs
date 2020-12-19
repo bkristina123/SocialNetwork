@@ -7,5 +7,8 @@ namespace SocialNetwork.Services.Interfaces
     {
         void SendFriendRequest(int targetUserId);
         IEnumerable<FriendRequest> GetFriendRequests();
+        bool CheckIfRequestIsSent(int sessionUserId, int targetUserId);
+        void AcceptRequest(int requestId);
+        void DeclineRequest(int requestId);
     }
 }

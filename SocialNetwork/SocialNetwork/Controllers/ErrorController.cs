@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SocialNetwork.Controllers
 {
@@ -12,7 +13,7 @@ namespace SocialNetwork.Controllers
         [Route("/Error/{statusCode}")]
         public IActionResult StatusCodeError(int statusCode)
         {
-            if(statusCode.Equals(404))
+            if(statusCode.Equals(StatusCodes.Status404NotFound))
             {
                 TempData["ErrorMessage"] = "404 Page Not Found";
 
