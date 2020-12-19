@@ -16,12 +16,24 @@ namespace SocialNetwork.Repositories
             _context = context;
         }
 
+        public void DeleteFriendRequest(FriendRequest request)
+        {
+            _context.FriendRequests.Remove(request);
+            _context.SaveChanges();
+        }
+
         public IEnumerable<FriendRequest> GetFriendRequests(User sessionUser)
         {
             return _context.FriendRequests
                 .Include(x => x.FromUser)
                 .Where(x => x.ToUserId.Equals(sessionUser.Id))
                 .ToList();
+        }
+
+        public FriendRequest GetRequestById(int requestId)
+        {
+            return _context.FriendRequests.FirstOrDefault(x => 
+            x.Id.Equals(requestId));
         }
 
         public FriendRequest GetRequestForUsers(int sessionUserId, int targetUserId)

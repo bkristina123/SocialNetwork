@@ -45,20 +45,37 @@
             Friends
         </div>
     </div>
-    @if (sessionUser.Id.Equals(Model.Id))
+    @if (Model.UsersRelation.Equals(RelationType.isSessionUser))
     {
         <div class="action-button">
-            <a class="button links" asp-controller="User" asp-action="Edit" asp-route-id="@sessionUser.Id">
+            <a class="button links" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id">
                 Edit Profile
             </a>
         </div>
-    } else 
+    }
+    else if (Model.UsersRelation.Equals(RelationType.isNotFriend))
     {
-    <div class="action-button">
-        <a class="button links" asp-controller="Network" asp-action="SendFriendRequest" asp-route-targetUserId="@Model.Id">
-            Add Friend
-        </a>
-    </div>
+        <div class="action-button">
+            <a class="button links" asp-controller="Network" asp-action="SendFriendRequest" asp-route-targetUserId="@Model.Id">
+                Add Friend
+            </a>
+        </div>
+    }
+    else if (Model.UsersRelation.Equals(RelationType.isRequested))
+    {
+        <div class="action-button">
+            <a class="button links">
+                Request pending
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="action-button">
+            <a class="button links">
+                Remove Friend
+            </a>
+        </div>
     }
 
 </div>

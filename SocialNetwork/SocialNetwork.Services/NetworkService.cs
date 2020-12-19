@@ -33,9 +33,9 @@ namespace SocialNetwork.Services
                     ToUserId = targetUserId
                 };
 
-                var relationExists = CheckFriendRelation(sessionUser.Id, targetUserId);
+                var requestExists = CheckIfRequestIsSent(sessionUser.Id, targetUserId);
 
-                if(!relationExists)
+                if(!requestExists)
                 {
                     _networkRepository.SendFriendRequest(request);
                 }
@@ -43,7 +43,7 @@ namespace SocialNetwork.Services
             }
         }
 
-        private bool CheckFriendRelation(int sessionUserId, int targetUserId)
+        public bool CheckIfRequestIsSent(int sessionUserId, int targetUserId)
         {
             var requestCheckModel = _networkRepository.GetRequestForUsers(sessionUserId, targetUserId);
 
@@ -53,6 +53,19 @@ namespace SocialNetwork.Services
             }
 
             return false;
+        }
+
+        public void AcceptRequest(int requestId)
+        {
+            var request = _networkRepository.GetRequestById(requestId);
+            //add in friends list logic
+            _networkRepository.DeleteFriendRequest(request);
+        }
+
+        public void DeclineRequest(int requestId)
+        {
+            var request = _networkRepository.GetRequestById(requestId);
+            _networkRepository.DeleteFriendRequest(request);
         }
     }
 }
