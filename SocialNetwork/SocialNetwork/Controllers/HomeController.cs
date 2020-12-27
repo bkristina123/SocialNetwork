@@ -57,6 +57,7 @@ namespace SocialNetwork.Controllers
                 var targetUser = _userService.GetUserById(id);
                 var sessionUser = _userService.GetSessionUser();
                 var requestIsSent = _networkService.CheckIfRequestIsSent(targetUser.Id, sessionUser.Id);
+                var areFriends = _networkService.CheckIfFriends(targetUser.Id, sessionUser.Id);
 
                 if (targetUser is null)
                 {
@@ -68,7 +69,7 @@ namespace SocialNetwork.Controllers
                     Select(x => x.ConvertToViewPostDTO())
                     .ToList();
 
-                RegulateUserType(targetUser, sessionUser, userDTO, requestIsSent);
+                RegulateUserType(targetUser, sessionUser, userDTO, requestIsSent, areFriends);
 
                 return View(userDTO);
             }
@@ -79,7 +80,7 @@ namespace SocialNetwork.Controllers
 
         }
 
-        private static void RegulateUserType(User targetUser, User sessionUser, ProfileUserDTO userDTO, bool requestIsSent)
+        private static void RegulateUserType(User targetUser, User sessionUser, ProfileUserDTO userDTO, bool requestIsSent, bool areFriends)
         {
 
             if (targetUser.Equals(sessionUser))
@@ -89,6 +90,10 @@ namespace SocialNetwork.Controllers
             else if (requestIsSent)
             {
                 userDTO.UsersRelation = RelationType.isRequested;
+            }
+            else if(areFriends) {
+
+                userDTO.UsersRelation = RelationType.isFriend;
             }
             else
             {

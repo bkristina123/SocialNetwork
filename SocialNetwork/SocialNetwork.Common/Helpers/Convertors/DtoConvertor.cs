@@ -62,5 +62,6 @@ namespace SocialNetwork.Common.Helpers
                 LastName = user.LastName,
             };
         }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SocialNetwork.Data.Models;
 using SocialNetwork.ModelDTOs.UserDTOs;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Interfaces
@@ -11,5 +12,6 @@ namespace SocialNetwork.Services.Interfaces
         User GetSessionUser();
         Task<IdentityResult> UpdateUser(EditUserDTO editUserDTO);
         Task<IdentityResult> ChangePassword(ChangePasswordDTO changePasswordDTO);
+        IEnumerable<User> GetUsersByIds(IEnumerable<int> userIds);
     }
 }

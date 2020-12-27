@@ -10,5 +10,8 @@ namespace SocialNetwork.Repositories.Interfaces
         FriendRequest GetRequestForUsers(int sessionUserId, int targetUserId);
         void DeleteFriendRequest(FriendRequest request);
         FriendRequest GetRequestById(int requestId);
+        void AddFriendConnection(FriendConnection friendConnection);
+        FriendConnection GetFriendConnectionForUsers(int firstUserId, int secondUserId);
+        IEnumerable<FriendConnection> GetFriendConnectionsForSingleUser(User sessionUser);
     }
 }

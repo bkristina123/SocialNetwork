@@ -1,6 +1,7 @@
 ﻿using SocialNetwork.Data.Models;
 using SocialNetwork.Repositories.Interfaces;
 using SocialNetwork.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace SocialNetwork.Services
@@ -58,14 +59,77 @@ namespace SocialNetwork.Services
         public void AcceptRequest(int requestId)
         {
             var request = _networkRepository.GetRequestById(requestId);
-            //add in friends list logic
-            _networkRepository.DeleteFriendRequest(request);
+
+            var friendConnection = new FriendConnection
+            {
+                FirstUserId = request.FromUserId,
+                SecondUserId = request.ToUserId
+            };
+
+
+            var areFriends = CheckIfFriends(request.FromUserId, request.ToUserId);
+
+            if(!areFriends) {
+
+                _networkRepository.AddFriendConnection(friendConnection);
+                _networkRepository.DeleteFriendRequest(request);
+            }
+
+            return;
         }
 
         public void DeclineRequest(int requestId)
         {
             var request = _networkRepository.GetRequestById(requestId);
             _networkRepository.DeleteFriendRequest(request);
+        }
+
+        public bool CheckIfFriends(int firstUserId, int secondUserId)
+        {
+            var friendsCheckModel = _networkRepository.GetFriendConnectionForUsers(firstUserId, secondUserId);
+
+            if(friendsCheckModel != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public IEnumerable<int> GetUserFriendsIds(User sessionUser)
+        {
+
+            var friendConnections = GetFriendConnectionsForSingeUser(sessionUser);
+
+            var userIds = new List<int>();
+
+
+            foreach (var connection in friendConnections)
+            {
+                if(connection.FirstUserId != sessionUser.Id)
+                {
+                    userIds.Add(connection.FirstUserId);
+                }
+
+                if(connection.SecondUserId != sessionUser.Id)
+                {
+                    userIds.Add(connection.SecondUserId);
+                }
+            }
+
+            return userIds;
+        }
+
+        private IEnumerable<FriendConnection> GetFriendConnectionsForSingeUser(User user)
+        {
+            return _networkRepository.GetFriendConnectionsForSingleUser(user);
+        }
+
+        public IEnumerable<User> GetUserFriends(User user)
+        {
+            var userIds = GetUserFriendsIds(user);
+
+            return _userService.GetUsersByIds(userIds);
         }
     }
 }

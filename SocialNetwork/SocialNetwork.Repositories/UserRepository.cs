@@ -1,5 +1,6 @@
 ﻿using SocialNetwork.Data;
 using SocialNetwork.Data.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SocialNetwork.Repositories
@@ -19,6 +20,12 @@ namespace SocialNetwork.Repositories
             var user = _context.Users.FirstOrDefault( x => x.Id.Equals(id));
 
             return user;
+        }
+
+        public IEnumerable<User> GetUsersByIds(IEnumerable<int> userIds)
+        {
+            return _context.Users
+                .Where(x => userIds.Contains(x.Id));
         }
     }
 }
