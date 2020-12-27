@@ -9,5 +9,6 @@ namespace SocialNetwork.Repositories.Interfaces
         IEnumerable<Post> GetAllPosts();
         List<Post> GetPostsForUser(int id);
         Post GetPostById(int id);
+        IEnumerable<Post> GetPostsByIds(IEnumerable<int> userIds, int sessionUserId);
     }
 }

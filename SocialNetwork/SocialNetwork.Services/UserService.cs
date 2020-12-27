@@ -5,6 +5,7 @@ using SocialNetwork.Data.Models;
 using SocialNetwork.ModelDTOs.UserDTOs;
 using SocialNetwork.Repositories;
 using SocialNetwork.Services.Interfaces;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -42,6 +43,11 @@ namespace SocialNetwork.Services
         public User GetUserById(int id)
         {
             return _userRepository.GetUserById(id);
+        }
+
+        public IEnumerable<User> GetUsersByIds(IEnumerable<int> userIds)
+        {
+            return _userRepository.GetUsersByIds(userIds);
         }
 
         public async Task<IdentityResult> UpdateUser(EditUserDTO editUserDTO)

@@ -37,6 +37,16 @@ namespace SocialNetwork.Repositories
                 .FirstOrDefault(x => x.Id.Equals(id));
         }
 
+        public IEnumerable<Post> GetPostsByIds(IEnumerable<int> userIds, int sessionUserId)
+        {
+            return _context.Posts.
+                Include(x => x.User)
+                .Where(x => userIds.Contains(x.UserId) ||
+                x.UserId.Equals(sessionUserId))
+                .OrderByDescending(x => x.DateCreated)
+                .ToList();
+        }
+
         public List<Post> GetPostsForUser(int id)
         {
             return _context.Posts

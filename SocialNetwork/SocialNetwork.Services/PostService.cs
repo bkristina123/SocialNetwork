@@ -15,12 +15,18 @@ namespace SocialNetwork.Services
     {
         private readonly IPostRepository _postRepository;
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
+        private readonly INetworkService _networkService;
 
         public PostService(IPostRepository postRepository,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IUserService userService,
+            INetworkService networkService)
         {
             _postRepository = postRepository;
             _configuration = configuration;
+            _userService = userService;
+            _networkService = networkService;
             
         }
 
@@ -61,7 +67,12 @@ namespace SocialNetwork.Services
 
         public IEnumerable<Post> GetAllPosts()
         {
-            return _postRepository.GetAllPosts();
+            var sessionUser = _userService.GetSessionUser();
+            var userIds = _networkService.GetUserFriendsIds(sessionUser);
+
+            IEnumerable<Post> posts = _postRepository.GetPostsByIds(userIds, sessionUser.Id);
+
+            return posts;
         }
 
         public Post GetPostById(int id)

@@ -35,19 +35,22 @@
             Friends List
         </div>
         <div class="friends-display-list">
-            <div class="friends-card">
-                <div class="card-image-container">
-                    <img class="card-image"
-                         src="https://scontent.fskp1-1.fna.fbcdn.net/v/t1.0-9/72855541_10210941506652624_4861907871039750144_n.jpg?_nc_cat=101&ccb=2&_nc_sid=09cbfe&_nc_ohc=u0k-gs_vzrIAX8EXi1v&_nc_ht=scontent.fskp1-1.fna&oh=72272e9be7bf97a51eebdfed244fe6de&oe=5FF05D9E"
-                         alt="">
+            @foreach (var friend in Model.UserFriends)
+            {
+                <div class="friends-card">
+                    <div class="card-image-container">
+                        <img class="card-image"
+                             src="data:image/*; base64, @Convert.ToBase64String(friend.ProfilePicture)"
+                             alt="">
+                    </div>
+                    <div class="user-name-container">
+                        <div class="username"> @friend.FirstName @friend.LastName</div>
+                    </div>
+                    <div class="profile-navigator-container">
+                        <a class="see-profile-button links" asp-controller="Home" asp-action="Profile" asp-route-id="@friend.Id"> See Profile</a>
+                    </div>
                 </div>
-                <div class="user-name-container">
-                    <div class="username"> Kristina Bojchevska</div>
-                </div>
-                <div class="profile-navigator-container">
-                    <div class="see-profile-button"> See Profile</div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>

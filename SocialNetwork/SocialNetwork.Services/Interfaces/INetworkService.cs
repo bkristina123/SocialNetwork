@@ -10,5 +10,8 @@ namespace SocialNetwork.Services.Interfaces
         bool CheckIfRequestIsSent(int sessionUserId, int targetUserId);
         void AcceptRequest(int requestId);
         void DeclineRequest(int requestId);
+        bool CheckIfFriends(int firstUserId, int secondUserId);
+        IEnumerable<int> GetUserFriendsIds(User user);
+        IEnumerable<User> GetUserFriends(User user);
     }
 }
