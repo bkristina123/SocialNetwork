@@ -13,5 +13,6 @@ namespace SocialNetwork.Repositories.Interfaces
         void AddFriendConnection(FriendConnection friendConnection);
         FriendConnection GetFriendConnectionForUsers(int firstUserId, int secondUserId);
         IEnumerable<FriendConnection> GetFriendConnectionsForSingleUser(User sessionUser);
+        void RemoveFriendConnection(FriendConnection friendConnection);
     }
 }

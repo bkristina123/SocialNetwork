@@ -72,7 +72,7 @@
     else if(Model.UsersRelation.Equals(RelationType.isFriend))
     {
         <div class="action-button">
-            <a class="button links">
+            <a class="button links" asp-controller="Network" asp-action="RemoveFriend" asp-route-id="@Model.Id">
                 Remove Friend
             </a>
         </div>
@@ -84,62 +84,7 @@
 
     @foreach (var post in Model.Posts)
     {
-        <div class="content-box">
-            <div class="post-username-container">
-                <div class="post-username-image">
-                    <div class="profile-image-container">
-                        <img class="profile-image"
-                             src="data:image/*; base64,@post.UserProfilePhoto"
-                             alt="">
-                    </div>
-                </div>
-                <div class="post-profile-name-container">
-                    @post.UserFirstName @post.UserLastName
-                </div>
-                <div class="date-created-container">
-                    @post.DateCreated
-                </div>
-            </div>
-
-            <div class="post-text-container">
-                @post.TextContent
-            </div>
-            <div class="post-media-container">
-                @if (post.PhotoContent != null)
-                {
-                    <img class="post-image" src="data:image/*; base64,@post.PhotoContent">
-                }
-            </div>
-            <div class="post-comment-section">
-                <div class="section-item-none" id="like-item">
-                    <i class="far fa-thumbs-up fa-lg"></i>
-                    Like
-                </div>
-                <div class="comment-section" id="comment-item">
-                    <i class="far fa-comment fa-lg"></i>
-                    Comment
-                </div>
-                <div class="section-item-none" id="share-item">
-                    <i class="fas fa-share fa-lg"></i>
-                    Share
-                </div>
-            </div>
-            <div class="add-comments">
-                <div class="post-username-image comment-image">
-                    <div class="profile-image-container">
-                        <img class="profile-image"
-                             src="data:image/*; base64, @Convert.ToBase64String(sessionUser.ProfilePicture)"
-                             alt="">
-                    </div>
-                </div>
-                <div class="comments-box-container">
-                    <form class="comments-box">
-                        <input type="text" class="comment-input" placeholder="Add Comment..">
-                    </form>
-                </div>
-            </div>
-
-        </div>
-    }
-</div>
+        <partial name="_ViewPostPartial" model="post"/>
+     }
+    </div>
 

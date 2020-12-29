@@ -264,3 +264,17 @@
     color: inherit;
     cursor:pointer;
 }
+
+.comments-count-section {
+    color: #949494;
+    display: flex;
+    border-top: 1px solid rgb(207, 203, 203);
+    width: 94%;
+    margin: 0 auto;
+    justify-content: flex-end;
+    font-size: smaller;
+}
+
+.comments-count-section > div {
+        padding: 5px;
+}
