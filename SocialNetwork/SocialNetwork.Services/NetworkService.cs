@@ -1,7 +1,6 @@
 ﻿using SocialNetwork.Data.Models;
 using SocialNetwork.Repositories.Interfaces;
 using SocialNetwork.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace SocialNetwork.Services
@@ -46,6 +45,7 @@ namespace SocialNetwork.Services
 
         public bool CheckIfRequestIsSent(int sessionUserId, int targetUserId)
         {
+            //fix this request pending thing
             var requestCheckModel = _networkRepository.GetRequestForUsers(sessionUserId, targetUserId);
 
             if(requestCheckModel != null)
@@ -130,6 +130,16 @@ namespace SocialNetwork.Services
             var userIds = GetUserFriendsIds(user);
 
             return _userService.GetUsersByIds(userIds);
+        }
+
+        public void RemoveFriend(int id)
+        {
+            var sessionUser = _userService.GetSessionUser();
+            var targetUser = _userService.GetUserById(id);
+
+            var friendConnection = _networkRepository.GetFriendConnectionForUsers(sessionUser.Id, targetUser.Id);
+
+            _networkRepository.RemoveFriendConnection(friendConnection);
         }
     }
 }

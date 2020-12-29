@@ -74,6 +74,12 @@ namespace SocialNetwork.Repositories
             _context.FriendRequests.Add(request);
             _context.SaveChanges();
         }
+
+        public void RemoveFriendConnection(FriendConnection friendConnection)
+        {
+            _context.FriendConnections.Remove(friendConnection);
+            _context.SaveChanges();
+        }
     }
 }
 ;

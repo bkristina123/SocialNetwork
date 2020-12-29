@@ -59,7 +59,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status404NotFound);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

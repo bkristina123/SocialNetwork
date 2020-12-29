@@ -13,5 +13,6 @@ namespace SocialNetwork.Services.Interfaces
         bool CheckIfFriends(int firstUserId, int secondUserId);
         IEnumerable<int> GetUserFriendsIds(User user);
         IEnumerable<User> GetUserFriends(User user);
+        void RemoveFriend(int id);
     }
 }

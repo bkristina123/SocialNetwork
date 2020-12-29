@@ -59,14 +59,44 @@ namespace SocialNetwork.Controllers
 
         public IActionResult AcceptRequest(int requestId)
         {
-            _networkService.AcceptRequest(requestId);
-            return RedirectToAction(nameof(ManageNetwork));
+            try
+            {
+                _networkService.AcceptRequest(requestId);
+                return RedirectToAction(nameof(ManageNetwork));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
         }
 
         public IActionResult DeclineRequest(int requestId)
         {
-            _networkService.DeclineRequest(requestId);
-            return RedirectToAction(nameof(ManageNetwork));
+            try
+            {
+                _networkService.DeclineRequest(requestId);
+                return RedirectToAction(nameof(ManageNetwork));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
+
+        public IActionResult RemoveFriend(int id)
+        {
+            try
+            {
+                _networkService.RemoveFriend(id);
+                return RedirectToAction("Profile", "Home", new { Id = id });
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
         }
     }
 }
