@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SocialNetwork.Data.Models
@@ -12,5 +13,6 @@ namespace SocialNetwork.Data.Models
         public DateTime DateCreated { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

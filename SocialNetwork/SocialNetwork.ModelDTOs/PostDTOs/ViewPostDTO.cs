@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SocialNetwork.Data.Models;
+using System;
+using System.Collections.Generic;
 
 namespace SocialNetwork.ModelDTOs.PostDTOs
 {
@@ -12,5 +14,7 @@ namespace SocialNetwork.ModelDTOs.PostDTOs
         public string PhotoContent { get; set; }
         public string TextContent { get; set; } 
         public DateTime DateCreated { get; set; }
+        public List<Comment> Comments { get; set; }
+        public int CommentsCount { get; set; }
     }
 }

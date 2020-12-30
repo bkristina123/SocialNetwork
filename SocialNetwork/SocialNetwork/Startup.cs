@@ -52,6 +52,9 @@ namespace SocialNetwork
             services.AddScoped<INetworkService, NetworkService>();
             services.AddScoped<INetworkRepository, NetworkRepository>();
 
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+
             services.AddScoped<IUserClaimsPrincipalFactory<User>, AppUserClaimsPrincipalFactory>();
 
             services.AddControllersWithViews();

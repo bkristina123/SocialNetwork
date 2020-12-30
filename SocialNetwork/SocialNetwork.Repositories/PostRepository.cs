@@ -26,6 +26,8 @@ namespace SocialNetwork.Repositories
         {
             return _context.Posts
                 .Include(x => x.User)
+                .Include(x => x.Comments)
+                    .ThenInclude(x => x.User)
                 .OrderByDescending(x => x.DateCreated)
                 .ToList();
         }
@@ -34,6 +36,8 @@ namespace SocialNetwork.Repositories
         {
             return _context.Posts
                 .Include(x => x.User)
+                .Include(x => x.Comments)
+                    .ThenInclude(x => x.User)
                 .FirstOrDefault(x => x.Id.Equals(id));
         }
 
@@ -41,6 +45,8 @@ namespace SocialNetwork.Repositories
         {
             return _context.Posts.
                 Include(x => x.User)
+                .Include(x => x.Comments)
+                    .ThenInclude(x=> x.User)
                 .Where(x => userIds.Contains(x.UserId) ||
                 x.UserId.Equals(sessionUserId))
                 .OrderByDescending(x => x.DateCreated)

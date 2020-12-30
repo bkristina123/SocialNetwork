@@ -36,7 +36,9 @@ namespace SocialNetwork.Common.Helpers
                 PhotoContent = photoContent,
                 TextContent = post.Content,
                 DateCreated = post.DateCreated,
-                UserProfilePhoto = Convert.ToBase64String(post.User.ProfilePicture)
+                UserProfilePhoto = Convert.ToBase64String(post.User.ProfilePicture),
+                Comments = post.Comments,
+                CommentsCount = post.Comments.Count
             };
         }
 

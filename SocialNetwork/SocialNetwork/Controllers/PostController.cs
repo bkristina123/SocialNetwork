@@ -62,5 +62,6 @@ namespace SocialNetwork.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
     }
 }
