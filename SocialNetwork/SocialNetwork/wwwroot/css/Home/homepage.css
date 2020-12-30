@@ -340,3 +340,46 @@ body {
 .comments-count-section > div {
         padding: 5px;
     }
+
+.comment-overview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    min-height: 50px;
+    padding: 10px;
+    background-color: #ececec;
+    border-radius: 7px;
+}
+
+
+.comment-info-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-user-photo > img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.comment-date {
+    margin-left: 10px;
+    font-size: xx-small;
+    color: #5e5a5a;
+}
+
+.comment-username {
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 14px;
+}

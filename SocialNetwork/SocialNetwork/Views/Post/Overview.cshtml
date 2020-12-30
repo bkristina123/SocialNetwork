@@ -69,13 +69,32 @@
                 <div class="post-username-image comment-image">
                     <div class="profile-image-container">
                         <img class="profile-image"
-                             src="@sessionUser.ProfilePicture" alt="">
+                             src="data:image/*; base64, @Convert.ToBase64String(sessionUser.ProfilePicture)" alt="">
                     </div>
                 </div>
                 <div class="comments-box-container">
                     <form class="comments-box">
                         <input type="text" class="comment-input" placeholder="Add Comment..">
                     </form>
+                </div>
+            </div>
+            <div class="comments-overview">
+                <div class="comment">
+                    <div class="comment-info-wrapper">
+                        <div class="comment-user-photo">
+                            <img src="https://www.aljazeera.com/wp-content/uploads/2020/04/ecab8c7af42a439d9043b0ade6e1f05b_18.jpeg?fit=999%2C562"
+                                 alt="">
+                        </div>
+                        <div class="comment-username">
+                            Kristina Bojchevska
+                        </div>
+                        <div class="comment-date">
+                            26.05.2020
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        This is a content of a comment This is a content This is a content of a comment This is a content of a commentof a comment This is a content of a comment This is a content of a comment
+                    </div>
                 </div>
             </div>
         </div>
