@@ -82,9 +82,16 @@
 
 <div class="middle-bar">
 
-    @foreach (var post in Model.Posts)
+    @if (Model.UsersRelation.Equals(RelationType.isFriend) ||
+        Model.UsersRelation.Equals(RelationType.isSessionUser))
     {
-        <partial name="_ViewPostPartial" model="post"/>
-     }
-    </div>
+        @foreach (var post in Model.Posts)
+        {
+            <partial name="_ViewPostPartial" model="post" />
+        }
+    } else
+    {
+        <div>Add friend to see full profile</div>
+    }
+</div>
 

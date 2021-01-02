@@ -59,15 +59,15 @@
             </div>
             <div class="popup-none" id="popup">
                 <a class="popup-item links" asp-controller="User" asp-action="Edit" asp-route-id="@int.Parse(User.FindFirst("Id").Value)">
-                    <img src="https://www.flaticon.com/svg/static/icons/svg/1160/1160515.svg" alt="">
+                    <img src="~/images/shared/edit.svg" alt="">
                     Edit Profile
                 </a>
                 <a class="popup-item links">
-                    <img src="https://www.flaticon.com/svg/static/icons/svg/900/900834.svg" alt="">
+                    <img src="~/images/shared/settings.svg" alt="">
                     Settings
                 </a>
                 <a class="popup-item links" asp-controller="Auth" asp-action="Logout">
-                    <img src="https://www.flaticon.com/svg/static/icons/svg/1574/1574351.svg" alt="">
+                    <img src="~/images/shared/logout.svg" alt="">
                     Log Out
                 </a>
             </div>
