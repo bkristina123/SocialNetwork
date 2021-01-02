@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Services", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Repositories", "SocialNetwork.Repositories\SocialNetwork.Repositories.csproj", "{AFDA0DB6-205F-4B9A-A253-5AB7D6C37027}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.ModelDTOs", "SocialNetwork.ModelDTOs\SocialNetwork.ModelDTOs.csproj", "{08265FB9-835C-4519-BEB1-51E98F1F943A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.ModelDTOs", "SocialNetwork.ModelDTOs\SocialNetwork.ModelDTOs.csproj", "{08265FB9-835C-4519-BEB1-51E98F1F943A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.Common", "SocialNetwork.Common\SocialNetwork.Common.csproj", "{60DF7164-1978-43F5-AA1B-89D7353F5F67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Common", "SocialNetwork.Common\SocialNetwork.Common.csproj", "{60DF7164-1978-43F5-AA1B-89D7353F5F67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -20,8 +20,9 @@ namespace SocialNetwork.Common.Helpers
             var identity = await base.GenerateClaimsAsync(user);
             identity.AddClaim(new Claim("FirstName", user.FirstName));
             identity.AddClaim(new Claim("LastName", user.LastName));
+            identity.AddClaim(new Claim("Id", user.Id.ToString()));
 
-            return identity;
+            return identity;    
         }
     }
 }

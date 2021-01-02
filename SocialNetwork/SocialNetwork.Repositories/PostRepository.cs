@@ -57,6 +57,8 @@ namespace SocialNetwork.Repositories
         {
             return _context.Posts
                 .Include(x => x.User)
+                .Include(x => x.Comments)
+                    .ThenInclude(x => x.User)
                 .OrderByDescending(x => x.DateCreated)
                 .Where(x => x.UserId.Equals(id))
                 .ToList();
