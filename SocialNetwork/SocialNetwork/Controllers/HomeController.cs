@@ -55,14 +55,16 @@ namespace SocialNetwork.Controllers
             try
             {
                 var targetUser = _userService.GetUserById(id);
-                var sessionUser = _userService.GetSessionUser();
-                var requestIsSent = _networkService.CheckIfRequestIsSent(targetUser.Id, sessionUser.Id);
-                var areFriends = _networkService.CheckIfFriends(targetUser.Id, sessionUser.Id);
 
                 if (targetUser is null)
                 {
                     return StatusCode(StatusCodes.Status404NotFound);
                 }
+
+                var sessionUser = _userService.GetSessionUser();
+                var requestIsSent = _networkService.CheckIfRequestIsSent(targetUser.Id, sessionUser.Id);
+                var areFriends = _networkService.CheckIfFriends(targetUser.Id, sessionUser.Id);
+
 
                 var userDTO = targetUser.ConvertToProfileUserDTO();
                 userDTO.Posts = _postService.GetPostsOfUser(targetUser.Id).
