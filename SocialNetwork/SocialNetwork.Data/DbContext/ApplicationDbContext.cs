@@ -16,5 +16,7 @@ namespace SocialNetwork.Data
         public DbSet<FriendRequest> FriendRequests { get; set; }
         public DbSet<FriendConnection> FriendConnections { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<ChatRoom> ChatRooms { get; set; }
     }
 }   
