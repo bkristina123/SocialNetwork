@@ -1,6 +1,7 @@
-﻿
+﻿@model SocialNetwork.ModelDTOs.ViewModelDTOs.ChatRoomDTO
 @{
     ViewData["Title"] = "Overview";
+
 }
 
 @section Styles {
@@ -10,58 +11,52 @@
 <div class="left-bar">
     <div class="chat-room-header">
         <img id="add-chatroom-img" src="~/images/chat/610413.svg" alt="">
-        <div class="add-chatroom-text"> Add new chatroom</div>
+        <a class="add-chatroom-text"> Search Friends</a>
     </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    @*<div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>
-    <div class="chat-room-wrapper">
-
-    </div>*@
-
+    @foreach (var item in Model.ChatUsers)
+    {
+        <a class="chat-room-wrapper links" asp-controller="Chat" asp-action="CreateRoom" asp-route-userId="@item.Id">
+            <img src="data:image/*; base64, @item.ProfilePhoto" alt="Alternate Text" />
+            <span> @item.FirstName @item.LastName</span>
+        </a>
+    }
 </div>
 <div class="middle-bar">
-    <div class="chat-container">
-        <div class="container">
+
+    @if (Model.ChatRoom is null)
+    {
+        <div class="chat-container"> Enter chatroom to see messages </div>
+
+    }
+    else
+    {
+<div class="chat-container">
+
+    @foreach (var message in Model.ChatRoom.Messages)
+    {
+        if (message.UserId.Equals(Model.SessionUser.Id))
+        {
+            <div class="container">
+                <img src="data:image/*; base64, @Convert.ToBase64String(message.User.ProfilePicture)"
+                     alt="Avatar">
+                <p>@message.Text</p>
+                <span class="time-right">@message.DateCreated.ToShortDateString()</span>
+            </div>
+        }
+        else
+        {
+            <div class="container darker">
+                <img src="data:image/*; base64, @Convert.ToBase64String(message.User.ProfilePicture)"
+                     alt="Avatar">
+                <p>@message.Text</p>
+                <span class="time-right">@message.DateCreated.ToShortDateString()</span>
+            </div>
+        }
+
+
+    }
+
+    @*<div class="container">
             <img src="https://vanishingportrait.com/wp-content/uploads/2019/05/tiffanytrenda-vanishingportrait-identity.jpg"
                  alt="Avatar">
             <p>Hello. How are you today?</p>
@@ -111,10 +106,17 @@
                 need to know
             </p>
             <span class="time-right">11:10</span>
-        </div>
-    </div>
-    <div class="input-message-container">
-        <input id="writeMessage" type="text">
-        <button id="sendMessage" type="submit">Send</button>
-    </div>
+        </div>*@
+
+</div>
+
+
+        <form class="input-message-container" asp-controller="Chat" asp-action="AddMessage" method="post">
+            <input id="writeMessage" name="messageInput" type="text">
+            <input type="hidden" name="chatRoomId" value="@Model.ChatRoom.Id">
+            <button id="sendMessage" type="submit">Send</button>
+        </form>
+    }
+
+
 </div>
