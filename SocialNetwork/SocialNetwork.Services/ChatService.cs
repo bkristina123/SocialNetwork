@@ -1,8 +1,11 @@
-﻿using SocialNetwork.Data.Models;
+﻿using SocialNetwork.Common.Helpers;
+using SocialNetwork.Data.Models;
+using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Repositories.Interfaces;
 using SocialNetwork.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SocialNetwork.Services
 {
@@ -10,12 +13,26 @@ namespace SocialNetwork.Services
     {
         private readonly IChatRepository _chatRepository;
         private readonly IUserService _userService;
+        private readonly INetworkService _networkService;
 
         public ChatService(IChatRepository chatRepository,
-            IUserService userService)
+            IUserService userService, INetworkService networkService)
         {
             _chatRepository = chatRepository;
             _userService = userService;
+            _networkService = networkService;
+        }
+
+        public ChatRoomDTO CreateChatRoomDTO(int chatRoomId, User sessionUser)
+        {
+            return new ChatRoomDTO
+            {
+                ChatUsers = _networkService.GetUserFriends(sessionUser).
+                Select(x =>
+                x.ConvertToProfileUserDTO()),
+                ChatRoom = GetChatRoomById(chatRoomId),
+                SessionUser = _userService.GetSessionUser()
+            };
         }
 
         public void AddMessage(string messageInput, int chatRoomId)
