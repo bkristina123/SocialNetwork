@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Common.Helpers;
+using SocialNetwork.Data.Models;
 using SocialNetwork.ModelDTOs.ViewModelDTOs;
 using SocialNetwork.Services.Interfaces;
 using System.Linq;
@@ -24,19 +25,11 @@ namespace SocialNetwork.Controllers
         public IActionResult Overview(int chatRoomId)
         {
             var sessionUser = _userService.GetSessionUser();
-
-            var chatOverviewDTO = new ChatRoomDTO
-            {
-                ChatUsers = _networkService.GetUserFriends(sessionUser).
-                Select(x =>
-                x.ConvertToProfileUserDTO()),
-                ChatRoom =_chatService.GetChatRoomById(chatRoomId),
-                SessionUser = _userService.GetSessionUser()
-            };
+            ChatRoomDTO chatOverviewDTO = _chatService.CreateChatRoomDTO(chatRoomId, sessionUser);
 
             return View(chatOverviewDTO);
         }
-
+        
 
         public IActionResult CreateRoom(int userId)
         {
